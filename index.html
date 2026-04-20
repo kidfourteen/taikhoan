@@ -925,6 +925,7 @@ renderProducts();
 
 // ════════ ORDER DRAWER ════════
 let currProd=null, currVar=null, orderCode='';
+let _buyerName='', _buyerEmail='', _buyerZalo='';
 
 function openOrder(id) {
   const prods = getShopProducts();
@@ -1031,6 +1032,10 @@ function goStep3() {
   const zalo = document.getElementById('f-zalo').value.trim();
   if (!name) { showToast('Vui lòng nhập họ tên','error'); return; }
   if (!email||!email.includes('@')) { showToast('Email không hợp lệ','error'); return; }
+  // Lưu vào biến global để dùng khi confirmDone
+  _buyerName  = name;
+  _buyerEmail = email;
+  _buyerZalo  = zalo;
   // Gửi telegram với nút Zalo
   const cfg = getCfg();
   if (cfg.tgToken && cfg.tgChatId && cfg.tgNew) {
@@ -1066,7 +1071,28 @@ function goStep3() {
   }
   renderStep(3);
 }
-function confirmDone() { renderStep(4); }
+function confirmDone() {
+  // Lưu đơn vào localStorage để hiện trong Admin Dashboard
+  const orders = getOrders();
+  const newOrder = {
+    id:        orderCode,
+    createdAt: new Date().toISOString(),
+    name:      _buyerName    || '',
+    email:     _buyerEmail   || '',
+    zalo:      _buyerZalo    || '',
+    product:   currProd ? (currProd.name + (currVar ? ' — ' + currVar.name : '')) : '',
+    amount:    currVar ? (currVar.price || 0) : 0,
+    payment:   'Chuyển khoản',
+    status:    'pending',
+    account:   '',
+    note:      '',
+  };
+  orders.unshift(newOrder);
+  setOrders(orders);
+  // Trigger storage event để Admin Panel tự refresh nếu đang mở
+  window.dispatchEvent(new StorageEvent('storage', { key: 'tk_orders' }));
+  renderStep(4);
+}
 
 // ════════ ADMIN LOGIN ════════
 function openAdminEntry() {
@@ -1132,6 +1158,26 @@ function admRefresh() {
 function admInit() {
   admDashboard();
   document.querySelectorAll('.modal-ov').forEach(el => el.addEventListener('click', e => { if(e.target===el) el.classList.remove('open'); }));
+  // Lắng nghe đơn mới từ shop (cùng tab hoặc tab khác)
+  window.addEventListener('storage', e => {
+    if (e.key === 'tk_orders') {
+      if (admCurPage === 'dashboard') admDashboard();
+      if (admCurPage === 'orders')    renderOrders();
+      const pending = getOrders().filter(o => o.status === 'pending').length;
+      const cnt = document.getElementById('sb-cnt');
+      if (cnt) cnt.textContent = pending;
+      showToast('🛒 Có đơn hàng mới!', 'success');
+    }
+  });
+  // Auto-refresh dashboard mỗi 15 giây để hiển thị đơn mới từ shop
+  setInterval(() => {
+    if (admCurPage === 'dashboard') admDashboard();
+    if (admCurPage === 'orders')    renderOrders();
+    // Cập nhật badge đơn pending trên sidebar
+    const pending = getOrders().filter(o => o.status === 'pending').length;
+    const cnt = document.getElementById('sb-cnt');
+    if (cnt) cnt.textContent = pending;
+  }, 15000);
 }
 
 // ════════ DASHBOARD ════════
