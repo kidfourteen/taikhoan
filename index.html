@@ -14,8 +14,8 @@
 <script>
 const SITE_CONFIG = {
   ZALO_PHONE: '0899525666',
-  BANK_NAME: 'Vietcombank',
-  BANK_ACCOUNT: '0899525666',
+  BANK_NAME: 'Techcombank',
+  BANK_ACCOUNT: '19032729616028',
   BANK_HOLDER: 'TRAN MINH DUC',
   MOMO_PHONE: '0899525666',
   MOMO_NAME: 'TRAN MINH DUC',
@@ -121,6 +121,11 @@ a{text-decoration:none;color:inherit}
 .fade-up{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
 .fade-up.visible{opacity:1;transform:none}
 
+/* ── GLOBAL SMOOTH ── */
+*{-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+img{max-width:100%;height:auto}
+
 /* ── SHOP NAV ── */
 #shop-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);padding:0 2rem;gap:2rem;transition:box-shadow .2s;backdrop-filter:blur(8px)}
 #shop-nav.scrolled{box-shadow:var(--shadow-md)}
@@ -148,7 +153,7 @@ a{text-decoration:none;color:inherit}
 .mob-cta{margin-top:1rem;background:var(--amber);color:var(--white)!important;text-align:center;border-radius:8px}
 
 /* ── HERO ── */
-.hero{min-height:calc(100vh - 60px);display:flex;align-items:center;padding:5rem 2rem 3rem;background:linear-gradient(135deg,var(--white) 0%,var(--blue-light) 50%,var(--purple-light) 100%);position:relative;overflow:hidden;margin-top:60px}
+.hero{min-height:min(600px,80vh);display:flex;align-items:center;padding:3rem 2rem 2.5rem;background:linear-gradient(135deg,var(--white) 0%,var(--blue-light) 50%,var(--purple-light) 100%);position:relative;overflow:hidden;margin-top:60px}
 .hero::before{content:'';position:absolute;top:-30%;right:-15%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.06),transparent 70%);pointer-events:none}
 .hero::after{content:'';position:absolute;bottom:-20%;left:-10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.06),transparent 70%);pointer-events:none}
 .hero-inner{max-width:1140px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:center}
@@ -224,6 +229,7 @@ h2{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;color:var(--black);margin-
 .prod-card.c-green::before{background:var(--green)}
 .prod-card.c-red::before{background:var(--red)}
 .prod-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:var(--blue-mid)}
+@media(hover:none){.prod-card:hover{transform:none;box-shadow:var(--shadow)}}
 .prod-card:hover::before{opacity:1}
 .prod-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.9rem}
 .prod-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;overflow:hidden}
@@ -463,21 +469,74 @@ tr:hover td{background:rgba(37,99,235,.02)}
 /* RESPONSIVE */
 @media(max-width:900px){
   .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .hero-inner{grid-template-columns:1fr}
+  .hero-inner{grid-template-columns:1fr;gap:1.5rem}
   .hero-card{display:none}
   .rules-grid,.adm-form-row{grid-template-columns:1fr}
   .proof-grid{grid-template-columns:repeat(2,1fr)}
   .footer-top{grid-template-columns:1fr 1fr}
-  .adm-sidebar{transform:translateX(-100%);transition:transform .25s;--sidebar:0px}
+  .adm-sidebar{transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);--sidebar:0px}
+  .adm-sidebar.mob-open{transform:translateX(0);box-shadow:4px 0 20px rgba(0,0,0,.3)}
   .adm-main{margin-left:0}
+  .adm-topbar{padding:0 1rem}
+  #adm-burger{display:flex!important}
+  .adm-content{padding:1rem}
 }
 @media(max-width:640px){
+  /* Nav */
   .nav-links,.nav-right .nav-zalo{display:none}
   .burger{display:flex}
-  h1{font-size:2rem}
-  .metrics-inner,.proof-grid{grid-template-columns:repeat(2,1fr)}
-  .footer-top{grid-template-columns:1fr}
+  /* Hero */
+  .hero{padding:2rem 1rem 2rem;min-height:auto}
+  h1{font-size:1.75rem;letter-spacing:-.5px}
+  .hero-sub{font-size:.9rem;margin-bottom:1.2rem}
+  .hero-btns{gap:.5rem}
+  .hero-btns .btn-primary,.hero-btns .btn-secondary{padding:.6rem 1.1rem;font-size:13px}
+  .hero-eyebrow{font-size:11px;padding:4px 10px}
+  /* Metrics */
+  .metrics-bar{padding:1rem}
+  .metrics-inner{grid-template-columns:repeat(2,1fr);gap:.6rem}
+  .metric-num{font-size:1.3rem}
+  /* Products */
+  .prod-grid{grid-template-columns:1fr 1fr;gap:.6rem}
+  .prod-card{padding:1rem}
+  .prod-name{font-size:13px}
+  .prod-desc{font-size:11px}
+  .prod-price-amount{font-size:1.1rem}
+  .prod-btn{padding:.4rem .8rem;font-size:12px}
+  /* Filter */
+  .filter-row{gap:.3rem}
+  .ftab{padding:.35rem .75rem;font-size:12px}
+  .sort-btn{padding:.3rem .65rem;font-size:11px}
+  /* Drawer mobile */
+  .drawer{border-radius:16px 16px 0 0;max-height:96vh}
   .var-grid{grid-template-columns:repeat(2,1fr)}
+  .drawer-body{padding:1rem}
+  .drawer-footer{padding:.75rem 1rem}
+  /* Sections */
+  .section{padding:2.5rem 1rem}
+  .section-inner{max-width:100%}
+  h2{font-size:1.4rem}
+  .proof-grid{grid-template-columns:repeat(2,1fr);gap:1rem}
+  .proof-num{font-size:1.6rem}
+  /* Rules */
+  .rules-grid{grid-template-columns:1fr;gap:.75rem}
+  /* Reviews */
+  .rev-grid{grid-template-columns:1fr}
+  /* Footer */
+  .footer-top{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:.3rem;text-align:center}
+  /* Admin mobile */
+  .stats-grid{grid-template-columns:1fr 1fr;gap:.6rem}
+  .stat-val{font-size:1.3rem}
+  th,td{padding:.5rem .6rem;font-size:12px}
+  .adm-topbar{height:50px}
+  .adm-page-title{font-size:14px}
+}
+/* Extra small phones */
+@media(max-width:390px){
+  .prod-grid{grid-template-columns:1fr}
+  .metrics-inner{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:1.55rem}
 }
 </style>
 </head>
@@ -662,7 +721,7 @@ tr:hover td{background:rgba(37,99,235,.02)}
       <div><div class="footer-col-title">Liên hệ</div><div class="footer-contact-item">💬 Zalo: 0899525666</div><div class="footer-contact-item">📧 kidfourteen@gmail.com</div><div class="footer-contact-item">📍 Đà Nẵng, Việt Nam</div><div style="margin-top:.8rem"><a href="https://zalo.me/0899525666" target="_blank" class="btn-primary" style="font-size:12.5px;padding:.45rem 1rem;display:inline-flex">💬 Nhắn Zalo ngay</a></div></div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2025 taikhoan.store · Nhấn đúp logo footer để vào Admin</div>
+      <div class="footer-copy">© 2025 taikhoan.store</div>
       <div class="footer-copy">Hỗ trợ: Zalo 0899525666</div>
     </div>
   </div>
@@ -695,7 +754,7 @@ tr:hover td{background:rgba(37,99,235,.02)}
     <label class="login-label">Tên đăng nhập</label>
     <input class="login-input" type="text" id="al-user" value="admin">
     <label class="login-label">Mật khẩu</label>
-    <input class="login-input" type="password" id="al-pass" placeholder="Mặc định: admin123">
+    <input class="login-input" type="password" id="al-pass" placeholder="Mật khẩu">
     <button class="login-btn" onclick="doAdminLogin()">Đăng nhập →</button>
     <div style="text-align:center;margin-top:.75rem"><button onclick="closeAdmin()" style="background:none;border:none;color:var(--gray);font-size:13px;cursor:pointer">← Quay lại trang chủ</button></div>
   </div>
@@ -729,7 +788,7 @@ tr:hover td{background:rgba(37,99,235,.02)}
   </aside>
   <main class="adm-main">
     <div class="adm-topbar">
-      <div class="adm-page-title" id="adm-title">Dashboard</div>
+      <div style="display:flex;align-items:center;gap:.75rem"><button id="adm-burger" onclick="toggleAdmSidebar()" style="display:none;background:var(--lgray);border:none;border-radius:6px;width:34px;height:34px;align-items:center;justify-content:center;font-size:18px;cursor:pointer">☰</button><div class="adm-page-title" id="adm-title">Dashboard</div></div>
       <div style="display:flex;gap:.5rem">
         <button class="btn btn-bo btn-sm" onclick="exportCSV()">⬇ Export CSV</button>
         <button class="btn btn-bp btn-sm" onclick="openAddOrder()">+ Thêm đơn</button>
@@ -839,8 +898,8 @@ const DEFAULT_TG_CHATID = '861448907';
 const getCfg = () => {
   const saved = ls.get(CFG_KEY, {});
   return {
-    bankName:   saved.bankName   || 'Vietcombank',
-    bankAcc:    saved.bankAcc    || '0899525666',
+    bankName:   saved.bankName   || 'Techcombank',
+    bankAcc:    saved.bankAcc    || '19032729616028',
     bankHolder: saved.bankHolder || 'TRAN MINH DUC',
     momo:       saved.momo       || '0899525666',
     tgToken:    saved.tgToken    || DEFAULT_TG_TOKEN,
@@ -849,11 +908,26 @@ const getCfg = () => {
     tgStatus:   saved.tgStatus !== undefined ? saved.tgStatus : false,
   };
 };
-const getPass = () => localStorage.getItem(PASS_KEY) || 'admin123';
+const getPass = () => localStorage.getItem(PASS_KEY) || '123123123';
 
 // ════════ SHOP INIT ════════
 window.addEventListener('scroll', () => document.getElementById('shop-nav').classList.toggle('scrolled', window.scrollY > 10));
 function toggleMenu(){ document.getElementById('burger').classList.toggle('open'); document.getElementById('mob-menu').classList.toggle('open'); }
+function toggleAdmSidebar(){
+  const sb = document.querySelector('.adm-sidebar');
+  sb.classList.toggle('mob-open');
+  // Click outside to close
+  if(sb.classList.contains('mob-open')){
+    setTimeout(()=>{
+      document.addEventListener('click', function handler(e){
+        if(!sb.contains(e.target)&&!document.getElementById('adm-burger').contains(e.target)){
+          sb.classList.remove('mob-open');
+          document.removeEventListener('click',handler);
+        }
+      });
+    },100);
+  }
+}
 function closeMenu(){ document.getElementById('burger').classList.remove('open'); document.getElementById('mob-menu').classList.remove('open'); }
 
 const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:.08});
@@ -1139,6 +1213,8 @@ if (sessionStorage.getItem(SESSION_KEY)) {
 let admCurPage = 'dashboard', ordStatusFilter = 'all', editOrdId = null, editProdId = null;
 
 function admPage(page, el) {
+  // Close mobile sidebar
+  document.querySelector('.adm-sidebar')?.classList.remove('mob-open');
   ['dashboard','orders','products','settings'].forEach(p => document.getElementById('adm-'+p).style.display = p===page?'block':'none');
   document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
   if (el) el.classList.add('active');
