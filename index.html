@@ -3,10 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>taikhoan.store — Dịch vụ Premium Giá Tốt Nhất</title>
+<title>ducianallin.one — Dịch vụ Premium Giá Tốt Nhất</title>
 <meta name="description" content="Mua tài khoản Netflix, Claude, GPT, Adobe... giá rẻ. Giao qua Zalo trong 5 phút.">
+<!-- OG / Link preview -->
+<meta property="og:title" content="ducianallin.one — Dịch vụ Premium">
+<meta property="og:description" content="Netflix, Claude, GPT, Adobe và 50+ dịch vụ. Hàng chính chủ · Bảo hành fulltime · Giao qua Zalo trong 5 phút.">
+<meta property="og:image" content="https://ducianallin.one/og-image.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Favicon inline SVG (monogram D) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%230E0E12' rx='14'/%3E%3Cpolygon points='36,4 62,16 68,42 56,66 16,66 4,42 10,16 36,4' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpath d='M25 23 H36 C43.732 23 50 28.82 50 36 C50 43.18 43.732 49 36 49 H25 Z' fill='none' stroke='%23E8C97A' stroke-width='2' stroke-linejoin='round'/%3E%3Cline x1='30' y1='28' x2='30' y2='44' stroke='%23C9A84C' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='54' cy='18' r='4' fill='%23E8C97A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Epilogue:wght@200;300;400&display=swap" rel="stylesheet">
 
 <!-- ══════════════════════════════════════
      CẤU HÌNH — Chỉ sửa phần này
@@ -22,52 +30,52 @@ const SITE_CONFIG = {
 };
 
 const PRODUCTS_DEFAULT = [
-  { id:'netflix',    name:'Netflix Premium',      iconKey:'netflix',  category:'streaming', tags:['best'],       stock:15, oldPrice:null,   note:'Cấp sẵn ổn định',          variants:[{name:'1 tháng',price:55000},{name:'3 tháng',price:150000},{name:'6 tháng',price:290000}],   desc:'Cấp sẵn · 4K Ultra HD · Bảo hành fulltime' },
-  { id:'spotify',    name:'Spotify Premium',      iconKey:'spotify',  category:'streaming', tags:['sale'],       stock:8,  oldPrice:250000, note:'Chính chủ ổn định',         variants:[{name:'6 tháng',price:190000},{name:'1 năm',price:320000}],                                   desc:'Chính chủ · Không quảng cáo · Tải offline' },
-  { id:'youtube',    name:'YouTube Premium',      iconKey:'youtube',  category:'streaming', tags:[],             stock:5,  oldPrice:null,   note:'Chính chủ Add Fam iOS',      variants:[{name:'6 tháng',price:250000},{name:'1 năm',price:450000}],                                   desc:'Chính chủ · Add Fam iOS ổn định' },
-  { id:'galaxy',     name:'Galaxy VIP',           iconKey:'galaxy',   category:'streaming', tags:[],             stock:3,  oldPrice:null,   note:'Xem full phim trên app',     variants:[{name:'1 năm',price:400000}],                                                                 desc:'Cấp sẵn · Xem full phim · App Galaxy' },
-  { id:'fpt',        name:'FPT VVIP',             iconKey:'fpt',      category:'streaming', tags:[],             stock:0,  oldPrice:null,   note:'NHA + WC + VLeague',         variants:[{name:'1 Tivi / năm',price:300000},{name:'2 Tivi / năm',price:450000}],                       desc:'Cấp sẵn · Ngoại Hạng Anh · World Cup · VLeague' },
-  { id:'gpt-plus',   name:'GPT Plus',             iconKey:'gpt',      category:'ai',        tags:['hot','sale'], stock:20, oldPrice:120000, note:'Chính chủ · BH 3 tháng đầu', variants:[{name:'1 tháng',price:80000},{name:'1 năm (rate)',price:650000}],                             desc:'Chính chủ · Bảo hành 3 tháng đầu' },
-  { id:'gpt-go',     name:'GPT GO',               iconKey:'gpt',      category:'ai',        tags:[],             stock:10, oldPrice:null,   note:'Chính chủ · BH tháng đầu',   variants:[{name:'1 năm',price:150000}],                                                                 desc:'Chính chủ · Bảo hành tháng đầu' },
-  { id:'gpt-team',   name:'GPT Team Business',    iconKey:'gpt',      category:'ai',        tags:[],             stock:7,  oldPrice:null,   note:'Chính chủ · Có Fam 4 slot',  variants:[{name:'1 tháng',price:50000}],                                                                desc:'Chính chủ · Có fam · Add 4 slot' },
-  { id:'gpt-pro',    name:'GPT Pro',              iconKey:'gpt',      category:'ai',        tags:[],             stock:4,  oldPrice:null,   note:'Chính chủ cao cấp',          variants:[{name:'5x Pro / tháng',price:650000},{name:'20x Pro / tháng',price:1800000}],                 desc:'Chính chủ · Hiệu năng cao nhất' },
-  { id:'claude-std', name:'Claude Pro Standard',  iconKey:'claude',   category:'ai',        tags:['hot','best'], stock:12, oldPrice:500000, note:'1.25x usage · Hàng sạch',    variants:[{name:'1 tháng',price:380000}],                                                               desc:'Chính chủ · 1.25x usage · Không tut · Phù hợp gia hạn dài hạn' },
-  { id:'claude-prem',name:'Claude Pro Premium',   iconKey:'claude',   category:'ai',        tags:[],             stock:3,  oldPrice:null,   note:'6.25x usage · Hàng sạch',    variants:[{name:'1 tháng',price:1900000}],                                                              desc:'Chính chủ · 6.25x usage · Dành cho heavy user' },
-  { id:'gemini-5k',  name:'Gemini Ultra 5k',      iconKey:'gemini',   category:'ai',        tags:[],             stock:6,  oldPrice:null,   note:'5k credits · Full Antigravity', variants:[{name:'1 tháng',price:350000}],                                                            desc:'Chính chủ · 5k credits · Full Antigravity' },
-  { id:'gemini-12k', name:'Gemini Ultra 12.5k',   iconKey:'gemini',   category:'ai',        tags:[],             stock:4,  oldPrice:null,   note:'12.5k credits · Full Antigravity', variants:[{name:'1 tháng',price:400000}],                                                        desc:'Chính chủ · 12.5k credits · Full Antigravity' },
-  { id:'gemini-25k', name:'Gemini Ultra 25k',     iconKey:'gemini',   category:'ai',        tags:['best'],       stock:2,  oldPrice:null,   note:'25k credits · Full Antigravity', variants:[{name:'1 tháng',price:650000}],                                                           desc:'Chính chủ · 25k credits · Full Antigravity' },
-  { id:'grok',       name:'Grok Super',           iconKey:'grok',     category:'ai',        tags:[],             stock:9,  oldPrice:null,   note:'Cấp sẵn · Chính chủ in-app', variants:[{name:'25 ngày (cấp sẵn)',price:50000},{name:'Chính chủ in-app',price:350000}],               desc:'Cấp sẵn ổn định · Hoặc chính chủ in-app' },
-  { id:'adobe',      name:'Adobe Full Apps',      iconKey:'adobe',    category:'design',    tags:['best','sale'],stock:11, oldPrice:150000, note:'Tối đa 2 thiết bị · Tool fix', variants:[{name:'4 tháng',price:100000},{name:'1 năm',price:450000}],                                 desc:'Ổn định · 2 thiết bị · Có tool tự fix lỗi · BH fulltime' },
-  { id:'capcut',     name:'CapCut Pro',            iconKey:'capcut',   category:'design',    tags:[],             stock:18, oldPrice:null,   note:'Add team · Cá nhân có sẵn',  variants:[{name:'1 tháng (team)',price:10000},{name:'6 tháng (team)',price:120000},{name:'6 tháng (cá nhân)',price:280000}], desc:'Cấp sẵn ổn định · Add team' },
-  { id:'office365',  name:'Office 365 Fam',       iconKey:'office',   category:'design',    tags:['sale'],       stock:5,  oldPrice:400000, note:'Bill iOS · Bảo hành full',   variants:[{name:'Slot lẻ / năm',price:110000},{name:'Fam / năm',price:300000}],                        desc:'Cấp sẵn · Bill iOS ổn định · BH fulltime' },
-  { id:'google-one', name:'Google One 5TB',       iconKey:'google',   category:'design',    tags:[],             stock:7,  oldPrice:null,   note:'Share 5 members',            variants:[{name:'Fam 5TB',price:200000}],                                                               desc:'Cấp sẵn · 5TB · Share 5 members · Ổn định' },
-  { id:'quizzi',     name:'Quizzi Super',         iconKey:'quizzi',   category:'design',    tags:[],             stock:4,  oldPrice:null,   note:'Chính chủ',                  variants:[{name:'1 năm',price:400000}],                                                                 desc:'Chính chủ · 1 năm sử dụng' },
-  { id:'express-vpn',name:'ExpressVPN',           iconKey:'vpn',      category:'vpn',       tags:[],             stock:6,  oldPrice:null,   note:'Cấp sẵn · 3-5 thiết bị',    variants:[{name:'1 năm',price:300000}],                                                                 desc:'Cấp sẵn ổn định · 3-5 thiết bị · Không change pass' },
-  { id:'hma-vpn',    name:'HMA VPN',              iconKey:'vpn',      category:'vpn',       tags:[],             stock:5,  oldPrice:null,   note:'Cấp sẵn ổn định',           variants:[{name:'1 năm',price:250000}],                                                                 desc:'Cấp sẵn · 1 năm · Ổn định' },
-  { id:'nord-vpn',   name:'NordVPN',              iconKey:'vpn',      category:'vpn',       tags:['best'],       stock:3,  oldPrice:null,   note:'Chính chủ · 3-5 thiết bị',  variants:[{name:'1 năm',price:450000}],                                                                 desc:'Chính chủ · Ổn định · Bảo mật cao nhất' },
-  { id:'lightroom',  name:'Lightroom',            iconKey:'lightroom',category:'photo',     tags:[],             stock:9,  oldPrice:null,   note:'6-8k màu · iOS & Android',   variants:[{name:'1 năm',price:150000}],                                                                 desc:'Cấp sẵn · 6-8k màu · iOS & Android · 1 thiết bị' },
-  { id:'hypic',      name:'Hypic',                iconKey:'photo',    category:'photo',     tags:[],             stock:8,  oldPrice:null,   note:'iOS & Android',              variants:[{name:'1 năm',price:130000}],                                                                 desc:'Cấp sẵn · Chỉnh ảnh AI · 1 thiết bị' },
-  { id:'beautyplus', name:'BeautyPlus',           iconKey:'beauty',   category:'photo',     tags:['sale'],       stock:6,  oldPrice:250000, note:'iOS only',                   variants:[{name:'1 năm',price:180000}],                                                                 desc:'Cấp sẵn · Làm đẹp da · iOS · 1 thiết bị' },
-  { id:'persona',    name:'Persona',              iconKey:'beauty',   category:'photo',     tags:[],             stock:4,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:220000}],                                                                 desc:'Cấp sẵn · AI portrait · iOS · 1 thiết bị' },
-  { id:'facetune',   name:'Facetune',             iconKey:'beauty',   category:'photo',     tags:[],             stock:3,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:220000}],                                                                 desc:'Cấp sẵn · Retouch ảnh · iOS · 1 thiết bị' },
-  { id:'photoroom',  name:'Photoroom',            iconKey:'photo',    category:'photo',     tags:[],             stock:7,  oldPrice:null,   note:'iOS & Android',              variants:[{name:'1 năm',price:150000}],                                                                 desc:'Cấp sẵn · Xóa nền AI · iOS & Android' },
-  { id:'picsart',    name:'PicsArt Gold',         iconKey:'photo',    category:'photo',     tags:[],             stock:10, oldPrice:null,   note:'iOS & Android',              variants:[{name:'1 năm',price:150000}],                                                                 desc:'Cấp sẵn · Chỉnh ảnh toàn diện' },
-  { id:'faceapp',    name:'FaceApp',              iconKey:'beauty',   category:'photo',     tags:[],             stock:5,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:250000}],                                                                 desc:'Cấp sẵn · AI face edit · iOS · 1 thiết bị' },
-  { id:'vsco',       name:'VSCO X',              iconKey:'vsco',     category:'photo',     tags:[],             stock:6,  oldPrice:null,   note:'iOS & Android',              variants:[{name:'1 năm',price:130000}],                                                                 desc:'Cấp sẵn · Filter VSCO · iOS & Android' },
-  { id:'meitu',      name:'Meitu VIP',            iconKey:'beauty',   category:'photo',     tags:[],             stock:4,  oldPrice:null,   note:'Tối đa 3 thiết bị',          variants:[{name:'1 tháng',price:110000}],                                                               desc:'Cấp sẵn · AI beauty · 3 thiết bị' },
-  { id:'wink',       name:'Wink VIP',             iconKey:'beauty',   category:'photo',     tags:[],             stock:3,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 tháng',price:180000}],                                                               desc:'Cấp sẵn · AI video beauty · iOS' },
-  { id:'xinghui',    name:'Xinghui',              iconKey:'beauty',   category:'photo',     tags:[],             stock:2,  oldPrice:null,   note:'iOS & Android',              variants:[{name:'1 tháng',price:350000}],                                                               desc:'Cấp sẵn · Chỉnh ảnh AI cao cấp' },
-  { id:'xingtu',     name:'Xingtu Trung',         iconKey:'beauty',   category:'photo',     tags:[],             stock:1,  oldPrice:null,   note:'iOS & Android',              variants:[{name:'1 tháng',price:250000},{name:'1 năm',price:900000}],                                    desc:'Cấp sẵn · AI portrait Trung Quốc' },
-  { id:'prettyup',   name:'PrettyUp',             iconKey:'beauty',   category:'photo',     tags:[],             stock:5,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:280000}],                                                                 desc:'Cấp sẵn · Body & face edit · iOS' },
-  { id:'dazz',       name:'Dazz Cam',             iconKey:'camera',   category:'photo',     tags:[],             stock:8,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:130000}],                                                                 desc:'Cấp sẵn · Film camera effect · iOS' },
-  { id:'b612',       name:'B612',                 iconKey:'camera',   category:'photo',     tags:[],             stock:6,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:130000}],                                                                 desc:'Cấp sẵn · Selfie camera · iOS' },
-  { id:'ulike',      name:'Ulike',                iconKey:'beauty',   category:'photo',     tags:[],             stock:4,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:130000}],                                                                 desc:'Cấp sẵn · Làm đẹp selfie · iOS' },
-  { id:'epik',       name:'Epik',                 iconKey:'camera',   category:'photo',     tags:[],             stock:5,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:130000}],                                                                 desc:'Cấp sẵn · AI photo enhance · iOS' },
-  { id:'soda',       name:'Soda',                 iconKey:'beauty',   category:'photo',     tags:[],             stock:7,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:130000}],                                                                 desc:'Cấp sẵn · AI face tuning · iOS' },
-  { id:'foodie',     name:'Foodie',               iconKey:'camera',   category:'photo',     tags:[],             stock:4,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:130000}],                                                                 desc:'Cấp sẵn · Food photography · iOS' },
-  { id:'wutacam',    name:'Wuta Cam',             iconKey:'camera',   category:'photo',     tags:[],             stock:3,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:130000}],                                                                 desc:'Cấp sẵn · Film camera · iOS' },
-  { id:'snapedit',   name:'Snap Edit',            iconKey:'camera',   category:'photo',     tags:[],             stock:6,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:130000}],                                                                 desc:'Cấp sẵn · Edit ảnh · iOS' },
-  { id:'watermark',  name:'Watermark',            iconKey:'photo',    category:'photo',     tags:[],             stock:5,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:130000}],                                                                 desc:'Cấp sẵn · Thêm watermark · iOS' },
+  { id:'netflix',    name:'Netflix Premium',      iconKey:'netflix',  category:'streaming', tags:['best'],       stock:15, oldPrice:null,   note:'Cấp sẵn ổn định',          variants:[{name:'1 tháng',price:61000},{name:'3 tháng',price:165000},{name:'6 tháng',price:319000}],   desc:'Cấp sẵn · 4K Ultra HD · Bảo hành fulltime' },
+  { id:'spotify',    name:'Spotify Premium',      iconKey:'spotify',  category:'streaming', tags:['sale'],       stock:8,  oldPrice:275000, note:'Chính chủ ổn định',         variants:[{name:'6 tháng',price:209000},{name:'1 năm',price:352000}],                                   desc:'Chính chủ · Không quảng cáo · Tải offline' },
+  { id:'youtube',    name:'YouTube Premium',      iconKey:'youtube',  category:'streaming', tags:[],             stock:5,  oldPrice:null,   note:'Chính chủ Add Fam iOS',      variants:[{name:'6 tháng',price:275000},{name:'1 năm',price:495000}],                                   desc:'Chính chủ · Add Fam iOS ổn định' },
+  { id:'galaxy',     name:'Galaxy VIP',           iconKey:'galaxy',   category:'streaming', tags:[],             stock:3,  oldPrice:null,   note:'Xem full phim trên app',     variants:[{name:'1 năm',price:440000}],                                                                 desc:'Cấp sẵn · Xem full phim · App Galaxy' },
+  { id:'fpt',        name:'FPT VVIP',             iconKey:'fpt',      category:'streaming', tags:[],             stock:0,  oldPrice:null,   note:'NHA + WC + VLeague',         variants:[{name:'1 Tivi / năm',price:330000},{name:'2 Tivi / năm',price:495000}],                       desc:'Cấp sẵn · Ngoại Hạng Anh · World Cup · VLeague' },
+  { id:'gpt-plus',   name:'GPT Plus',             iconKey:'gpt',      category:'ai',        tags:['hot','sale'], stock:20, oldPrice:132000, note:'Chính chủ · BH 3 tháng đầu', variants:[{name:'1 tháng',price:88000},{name:'1 năm (rate)',price:715000}],                             desc:'Chính chủ · Bảo hành 3 tháng đầu' },
+  { id:'gpt-go',     name:'GPT GO',               iconKey:'gpt',      category:'ai',        tags:[],             stock:10, oldPrice:null,   note:'Chính chủ · BH tháng đầu',   variants:[{name:'1 năm',price:165000}],                                                                 desc:'Chính chủ · Bảo hành tháng đầu' },
+  { id:'gpt-team',   name:'GPT Team Business',    iconKey:'gpt',      category:'ai',        tags:[],             stock:7,  oldPrice:null,   note:'Chính chủ · Có Fam 4 slot',  variants:[{name:'1 tháng',price:55000}],                                                                desc:'Chính chủ · Có fam · Add 4 slot' },
+  { id:'gpt-pro',    name:'GPT Pro',              iconKey:'gpt',      category:'ai',        tags:[],             stock:4,  oldPrice:null,   note:'Chính chủ cao cấp',          variants:[{name:'5x Pro / tháng',price:715000},{name:'20x Pro / tháng',price:1980000}],                 desc:'Chính chủ · Hiệu năng cao nhất' },
+  { id:'claude-std', name:'Claude Pro Standard',  iconKey:'claude',   category:'ai',        tags:['hot','best'], stock:12, oldPrice:550000, note:'1.25x usage · Hàng sạch',    variants:[{name:'1 tháng',price:418000}],                                                               desc:'Chính chủ · 1.25x usage · Không tut · Phù hợp gia hạn dài hạn' },
+  { id:'claude-prem',name:'Claude Pro Premium',   iconKey:'claude',   category:'ai',        tags:[],             stock:3,  oldPrice:null,   note:'6.25x usage · Hàng sạch',    variants:[{name:'1 tháng',price:2090000}],                                                              desc:'Chính chủ · 6.25x usage · Dành cho heavy user' },
+  { id:'gemini-5k',  name:'Gemini Ultra 5k',      iconKey:'gemini',   category:'ai',        tags:[],             stock:6,  oldPrice:null,   note:'5k credits · Full Antigravity', variants:[{name:'1 tháng',price:385000}],                                                            desc:'Chính chủ · 5k credits · Full Antigravity' },
+  { id:'gemini-12k', name:'Gemini Ultra 12.5k',   iconKey:'gemini',   category:'ai',        tags:[],             stock:4,  oldPrice:null,   note:'12.5k credits · Full Antigravity', variants:[{name:'1 tháng',price:440000}],                                                        desc:'Chính chủ · 12.5k credits · Full Antigravity' },
+  { id:'gemini-25k', name:'Gemini Ultra 25k',     iconKey:'gemini',   category:'ai',        tags:['best'],       stock:2,  oldPrice:null,   note:'25k credits · Full Antigravity', variants:[{name:'1 tháng',price:715000}],                                                           desc:'Chính chủ · 25k credits · Full Antigravity' },
+  { id:'grok',       name:'Grok Super',           iconKey:'grok',     category:'ai',        tags:[],             stock:9,  oldPrice:null,   note:'Cấp sẵn · Chính chủ in-app', variants:[{name:'25 ngày (cấp sẵn)',price:55000},{name:'Chính chủ in-app',price:385000}],               desc:'Cấp sẵn ổn định · Hoặc chính chủ in-app' },
+  { id:'adobe',      name:'Adobe Full Apps',      iconKey:'adobe',    category:'design',    tags:['best','sale'],stock:11, oldPrice:165000, note:'Tối đa 2 thiết bị · Tool fix', variants:[{name:'4 tháng',price:110000},{name:'1 năm',price:495000}],                                 desc:'Ổn định · 2 thiết bị · Có tool tự fix lỗi · BH fulltime' },
+  { id:'capcut',     name:'CapCut Pro',            iconKey:'capcut',   category:'design',    tags:[],             stock:18, oldPrice:null,   note:'Add team · Cá nhân có sẵn',  variants:[{name:'1 tháng (team)',price:11000},{name:'6 tháng (team)',price:132000},{name:'6 tháng (cá nhân)',price:308000}], desc:'Cấp sẵn ổn định · Add team' },
+  { id:'office365',  name:'Office 365 Fam',       iconKey:'office',   category:'design',    tags:['sale'],       stock:5,  oldPrice:440000, note:'Bill iOS · Bảo hành full',   variants:[{name:'Slot lẻ / năm',price:121000},{name:'Fam / năm',price:330000}],                        desc:'Cấp sẵn · Bill iOS ổn định · BH fulltime' },
+  { id:'google-one', name:'Google One 5TB',       iconKey:'google',   category:'design',    tags:[],             stock:7,  oldPrice:null,   note:'Share 5 members',            variants:[{name:'Fam 5TB',price:220000}],                                                               desc:'Cấp sẵn · 5TB · Share 5 members · Ổn định' },
+  { id:'quizzi',     name:'Quizzi Super',         iconKey:'quizzi',   category:'design',    tags:[],             stock:4,  oldPrice:null,   note:'Chính chủ',                  variants:[{name:'1 năm',price:440000}],                                                                 desc:'Chính chủ · 1 năm sử dụng' },
+  { id:'express-vpn',name:'ExpressVPN',           iconKey:'vpn',      category:'vpn',       tags:[],             stock:6,  oldPrice:null,   note:'Cấp sẵn · 3-5 thiết bị',    variants:[{name:'1 năm',price:330000}],                                                                 desc:'Cấp sẵn ổn định · 3-5 thiết bị · Không change pass' },
+  { id:'hma-vpn',    name:'HMA VPN',              iconKey:'vpn',      category:'vpn',       tags:[],             stock:5,  oldPrice:null,   note:'Cấp sẵn ổn định',           variants:[{name:'1 năm',price:275000}],                                                                 desc:'Cấp sẵn · 1 năm · Ổn định' },
+  { id:'nord-vpn',   name:'NordVPN',              iconKey:'vpn',      category:'vpn',       tags:['best'],       stock:3,  oldPrice:null,   note:'Chính chủ · 3-5 thiết bị',  variants:[{name:'1 năm',price:495000}],                                                                 desc:'Chính chủ · Ổn định · Bảo mật cao nhất' },
+  { id:'lightroom',  name:'Lightroom',            iconKey:'lightroom',category:'photo',     tags:[],             stock:9,  oldPrice:null,   note:'6-8k màu · iOS & Android',   variants:[{name:'1 năm',price:165000}],                                                                 desc:'Cấp sẵn · 6-8k màu · iOS & Android · 1 thiết bị' },
+  { id:'hypic',      name:'Hypic',                iconKey:'photo',    category:'photo',     tags:[],             stock:8,  oldPrice:null,   note:'iOS & Android',              variants:[{name:'1 năm',price:143000}],                                                                 desc:'Cấp sẵn · Chỉnh ảnh AI · 1 thiết bị' },
+  { id:'beautyplus', name:'BeautyPlus',           iconKey:'beauty',   category:'photo',     tags:['sale'],       stock:6,  oldPrice:275000, note:'iOS only',                   variants:[{name:'1 năm',price:198000}],                                                                 desc:'Cấp sẵn · Làm đẹp da · iOS · 1 thiết bị' },
+  { id:'persona',    name:'Persona',              iconKey:'beauty',   category:'photo',     tags:[],             stock:4,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:242000}],                                                                 desc:'Cấp sẵn · AI portrait · iOS · 1 thiết bị' },
+  { id:'facetune',   name:'Facetune',             iconKey:'beauty',   category:'photo',     tags:[],             stock:3,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:242000}],                                                                 desc:'Cấp sẵn · Retouch ảnh · iOS · 1 thiết bị' },
+  { id:'photoroom',  name:'Photoroom',            iconKey:'photo',    category:'photo',     tags:[],             stock:7,  oldPrice:null,   note:'iOS & Android',              variants:[{name:'1 năm',price:165000}],                                                                 desc:'Cấp sẵn · Xóa nền AI · iOS & Android' },
+  { id:'picsart',    name:'PicsArt Gold',         iconKey:'photo',    category:'photo',     tags:[],             stock:10, oldPrice:null,   note:'iOS & Android',              variants:[{name:'1 năm',price:165000}],                                                                 desc:'Cấp sẵn · Chỉnh ảnh toàn diện' },
+  { id:'faceapp',    name:'FaceApp',              iconKey:'beauty',   category:'photo',     tags:[],             stock:5,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:275000}],                                                                 desc:'Cấp sẵn · AI face edit · iOS · 1 thiết bị' },
+  { id:'vsco',       name:'VSCO X',              iconKey:'vsco',     category:'photo',     tags:[],             stock:6,  oldPrice:null,   note:'iOS & Android',              variants:[{name:'1 năm',price:143000}],                                                                 desc:'Cấp sẵn · Filter VSCO · iOS & Android' },
+  { id:'meitu',      name:'Meitu VIP',            iconKey:'beauty',   category:'photo',     tags:[],             stock:4,  oldPrice:null,   note:'Tối đa 3 thiết bị',          variants:[{name:'1 tháng',price:121000}],                                                               desc:'Cấp sẵn · AI beauty · 3 thiết bị' },
+  { id:'wink',       name:'Wink VIP',             iconKey:'beauty',   category:'photo',     tags:[],             stock:3,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 tháng',price:198000}],                                                               desc:'Cấp sẵn · AI video beauty · iOS' },
+  { id:'xinghui',    name:'Xinghui',              iconKey:'beauty',   category:'photo',     tags:[],             stock:2,  oldPrice:null,   note:'iOS & Android',              variants:[{name:'1 tháng',price:385000}],                                                               desc:'Cấp sẵn · Chỉnh ảnh AI cao cấp' },
+  { id:'xingtu',     name:'Xingtu Trung',         iconKey:'beauty',   category:'photo',     tags:[],             stock:1,  oldPrice:null,   note:'iOS & Android',              variants:[{name:'1 tháng',price:275000},{name:'1 năm',price:990000}],                                    desc:'Cấp sẵn · AI portrait Trung Quốc' },
+  { id:'prettyup',   name:'PrettyUp',             iconKey:'beauty',   category:'photo',     tags:[],             stock:5,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:308000}],                                                                 desc:'Cấp sẵn · Body & face edit · iOS' },
+  { id:'dazz',       name:'Dazz Cam',             iconKey:'camera',   category:'photo',     tags:[],             stock:8,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:143000}],                                                                 desc:'Cấp sẵn · Film camera effect · iOS' },
+  { id:'b612',       name:'B612',                 iconKey:'camera',   category:'photo',     tags:[],             stock:6,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:143000}],                                                                 desc:'Cấp sẵn · Selfie camera · iOS' },
+  { id:'ulike',      name:'Ulike',                iconKey:'beauty',   category:'photo',     tags:[],             stock:4,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:143000}],                                                                 desc:'Cấp sẵn · Làm đẹp selfie · iOS' },
+  { id:'epik',       name:'Epik',                 iconKey:'camera',   category:'photo',     tags:[],             stock:5,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:143000}],                                                                 desc:'Cấp sẵn · AI photo enhance · iOS' },
+  { id:'soda',       name:'Soda',                 iconKey:'beauty',   category:'photo',     tags:[],             stock:7,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:143000}],                                                                 desc:'Cấp sẵn · AI face tuning · iOS' },
+  { id:'foodie',     name:'Foodie',               iconKey:'camera',   category:'photo',     tags:[],             stock:4,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:143000}],                                                                 desc:'Cấp sẵn · Food photography · iOS' },
+  { id:'wutacam',    name:'Wuta Cam',             iconKey:'camera',   category:'photo',     tags:[],             stock:3,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:143000}],                                                                 desc:'Cấp sẵn · Film camera · iOS' },
+  { id:'snapedit',   name:'Snap Edit',            iconKey:'camera',   category:'photo',     tags:[],             stock:6,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:143000}],                                                                 desc:'Cấp sẵn · Edit ảnh · iOS' },
+  { id:'watermark',  name:'Watermark',            iconKey:'photo',    category:'photo',     tags:[],             stock:5,  oldPrice:null,   note:'iOS only',                   variants:[{name:'1 năm',price:143000}],                                                                 desc:'Cấp sẵn · Thêm watermark · iOS' },
 ]
 const NO_EXCHANGE_IDS = ['capcut','faceapp','picsart','meitu','wink','xingtu','b612','prettyup'];
 
@@ -99,20 +107,30 @@ const ICONS = {
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --blue:#2563EB;--blue-dark:#1d4ed8;--blue-light:#EFF6FF;--blue-mid:#DBEAFE;
-  --purple:#7C3AED;--purple-light:#F5F3FF;--purple-mid:#EDE9FE;
-  --amber:#F59E0B;--amber-light:#FFFBEB;--amber-dark:#D97706;
-  --green:#22C55E;--green-light:#F0FDF4;
-  --red:#EF4444;--red-light:#FEF2F2;
-  --black:#0F172A;--gray:#64748B;--lgray:#F1F5F9;--white:#FFFFFF;
+  /* Ducianallin brand palette — Light mode */
+  --bg:      #FAF9F6;
+  --surface: #FFFFFF;
+  --gold:    #C9A84C;
+  --gold2:   #b8943d;
+  --cream:   #1A1A1A;
+  --muted:   #64748B;
+  --d-border:#E2E8F0;
+
+  /* Functional aliases */
+  --blue:#C9A84C;--blue-dark:#b8943d;--blue-light:#FFFBEB;--blue-mid:#FEF3C7;
+  --purple:#9A7B2E;--purple-light:#FFFBEB;--purple-mid:#FEF3C7;
+  --amber:#C9A84C;--amber-light:#FFFBEB;--amber-dark:#b8943d;
+  --green:#16a34a;--green-light:#F0FDF4;
+  --red:#DC2626;--red-light:#FEF2F2;
+  --black:#1A1A1A;--gray:#64748B;--lgray:#F8F6F1;--white:#FFFFFF;
   --border:#E2E8F0;--border-dark:#CBD5E1;
-  --shadow:0 1px 3px rgba(0,0,0,.08);--shadow-md:0 4px 6px rgba(0,0,0,.07);--shadow-lg:0 10px 25px rgba(0,0,0,.1);
+  --shadow:0 1px 3px rgba(0,0,0,.07);--shadow-md:0 4px 6px rgba(0,0,0,.06);--shadow-lg:0 10px 25px rgba(0,0,0,.1);
   --ff:'Be Vietnam Pro',sans-serif;--mf:'DM Mono',monospace;
   --r:8px;--rc:12px;
   --sidebar:220px;
 }
 html{scroll-behavior:smooth}
-body{background:var(--white);color:var(--black);font-family:var(--ff);font-size:15px;line-height:1.65;overflow-x:hidden}
+body{background:var(--bg);color:var(--black);font-family:var(--ff);font-size:15px;line-height:1.65;overflow-x:hidden}
 button{cursor:pointer;font-family:var(--ff)}
 a{text-decoration:none;color:inherit}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
@@ -126,7 +144,7 @@ html{-webkit-text-size-adjust:100%}
 img{max-width:100%;height:auto}
 
 /* ── SHOP NAV ── */
-#shop-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);padding:0 2rem;gap:2rem;transition:box-shadow .2s;backdrop-filter:blur(8px)}
+#shop-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;background:rgba(250,249,246,.96);border-bottom:1px solid var(--border);padding:0 2rem;gap:2rem;transition:box-shadow .2s;backdrop-filter:blur(8px)}
 #shop-nav.scrolled{box-shadow:var(--shadow-md)}
 .nav-logo{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .nav-logo-icon{width:32px;height:32px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:15px}
@@ -152,9 +170,9 @@ img{max-width:100%;height:auto}
 .mob-cta{margin-top:1rem;background:var(--amber);color:var(--white)!important;text-align:center;border-radius:8px}
 
 /* ── HERO ── */
-.hero{min-height:min(600px,80vh);display:flex;align-items:center;padding:3rem 2rem 2.5rem;background:linear-gradient(135deg,var(--white) 0%,var(--blue-light) 50%,var(--purple-light) 100%);position:relative;overflow:hidden;margin-top:60px}
-.hero::before{content:'';position:absolute;top:-30%;right:-15%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.06),transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-20%;left:-10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.06),transparent 70%);pointer-events:none}
+.hero{min-height:min(600px,80vh);display:flex;align-items:center;padding:3rem 2rem 2.5rem;background:linear-gradient(135deg,#FAF9F6 0%,#FFFBEB 50%,#FFF8E1 100%);position:relative;overflow:hidden;margin-top:60px}
+.hero::before{content:'';position:absolute;top:-30%;right:-15%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.08),transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-20%;left:-10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(232,201,122,.04),transparent 70%);pointer-events:none}
 .hero-inner{max-width:1140px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:center}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:500;color:var(--gray);margin-bottom:1.3rem;box-shadow:var(--shadow)}
 .hero-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
@@ -165,7 +183,7 @@ h1 .hl-amber{color:var(--amber)}
 .hero-btns{display:flex;gap:.8rem;flex-wrap:wrap}
 .btn-primary{display:inline-flex;align-items:center;gap:7px;background:var(--amber);color:var(--white);padding:.7rem 1.6rem;border:none;border-radius:var(--r);font-family:var(--ff);font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;box-shadow:0 2px 8px rgba(245,158,11,.3)}
 .btn-primary:hover{background:var(--amber-dark);transform:translateY(-1px)}
-.btn-secondary{display:inline-flex;align-items:center;gap:7px;background:var(--white);color:var(--blue);padding:.7rem 1.6rem;border:1.5px solid var(--blue);border-radius:var(--r);font-family:var(--ff);font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.btn-secondary{display:inline-flex;align-items:center;gap:7px;background:var(--white);color:var(--gold);padding:.7rem 1.6rem;border:1.5px solid var(--gold);border-radius:var(--r);font-family:var(--ff);font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
 .btn-secondary:hover{background:var(--blue-light)}
 
 /* HERO CARD */
@@ -176,7 +194,7 @@ h1 .hl-amber{color:var(--amber)}
 .hcard-body{padding:1.1rem}
 .hcard-items{display:flex;flex-direction:column;gap:.4rem}
 .hcard-row{display:flex;align-items:center;justify-content:space-between;padding:.5rem .75rem;background:var(--lgray);border-radius:6px;font-size:12px;cursor:pointer;transition:background .15s}
-.hcard-row:hover{background:#DBEAFE}
+.hcard-row:hover{background:var(--blue-mid)}
 .hrow-left{display:flex;align-items:center;gap:.5rem}
 .hrow-icon{width:20px;height:20px;flex-shrink:0}
 .hrow-icon svg{width:100%;height:100%}
@@ -217,7 +235,7 @@ h2{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;color:var(--black);margin-
 .sort-btn.active{background:var(--black);border-color:var(--black);color:var(--white)}
 .search-wrap{position:relative;flex:1;min-width:180px;max-width:280px}
 .search-input{width:100%;padding:.48rem .85rem .48rem 2rem;border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;outline:none;transition:border .15s;color:var(--black);font-family:var(--ff)}
-.search-input:focus{border-color:var(--blue)}
+.search-input{background:var(--white)}.search-input:focus{border-color:var(--gold)}
 .search-icon{position:absolute;left:.65rem;top:50%;transform:translateY(-50%);color:var(--gray);font-size:13px;pointer-events:none}
 
 /* PRODUCT GRID */
@@ -230,7 +248,7 @@ h2{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;color:var(--black);margin-
 .prod-card.c-purple::before{background:var(--purple)}
 .prod-card.c-green::before{background:var(--green)}
 .prod-card.c-red::before{background:var(--red)}
-.prod-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:var(--blue-mid)}
+.prod-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:var(--gold)}
 @media(hover:none){.prod-card:hover{transform:none;box-shadow:var(--shadow)}}
 .prod-card:hover::before{opacity:1}
 .prod-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.9rem}
@@ -281,7 +299,7 @@ h2{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;color:var(--black);margin-
 .ne-chip{font-size:10.5px;font-family:var(--mf);background:#FECACA;color:#991B1B;padding:3px 8px;border-radius:4px;display:inline-block;margin:2px}
 
 /* PROOF */
-.proof-strip{background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:var(--rc);padding:2.5rem;color:var(--white)}
+.proof-strip{background:linear-gradient(135deg,var(--black),#2d2d2d);border-radius:var(--rc);padding:2.5rem;color:var(--white)}
 .proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center}
 .proof-num{font-size:2rem;font-weight:800;display:block;line-height:1}
 .proof-num.amber{color:var(--amber)}
@@ -346,7 +364,7 @@ footer{background:var(--black);color:var(--white);padding:3rem 2rem 2rem}
 .pm-tab{flex:1;padding:.65rem;border:1.5px solid var(--border);border-radius:var(--r);background:var(--white);color:var(--gray);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.4rem;transition:all .15s;font-family:var(--ff)}
 .pm-tab:hover,.pm-tab.active{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
 .qr-box{background:var(--lgray);border:1px solid var(--border);border-radius:var(--rc);padding:1.4rem;text-align:center;margin-bottom:.8rem}
-.qr-img{width:160px;height:160px;background:var(--white);border-radius:var(--r);margin:0 auto .9rem;display:flex;align-items:center;justify-content:center;padding:4px;border:1px solid var(--border)}
+.qr-img{width:160px;height:160px;background:#fff;border-radius:var(--r);margin:0 auto .9rem;display:flex;align-items:center;justify-content:center;padding:4px;border:1px solid var(--border)}
 .bank-rows{text-align:left}
 .bank-row{display:flex;justify-content:space-between;align-items:center;padding:.45rem 0;font-size:13px;border-bottom:1px solid var(--border)}
 .bank-row:last-child{border:none}
@@ -360,7 +378,7 @@ footer{background:var(--black);color:var(--white);padding:3rem 2rem 2rem}
 .done-screen{text-align:center;padding:1rem 0}
 .btn-full{width:100%;padding:.72rem;border-radius:var(--r);font-size:14.5px;font-weight:600;border:none;transition:all .15s;font-family:var(--ff)}
 .btn-full-primary{background:var(--amber);color:var(--white)}.btn-full-primary:hover{background:var(--amber-dark)}
-.btn-full-outline{background:var(--white);color:var(--gray);border:1.5px solid var(--border);margin-top:.5rem}.btn-full-outline:hover{border-color:var(--border-dark);color:var(--black)}
+.btn-full-outline{background:var(--white);color:var(--gray);border:1.5px solid var(--border);margin-top:.5rem}.btn-full-outline:hover{border-color:var(--gold);color:var(--black)}
 .btn-full-green{background:var(--green);color:var(--white)}.btn-full-green:hover{background:#16a34a}
 
 /* ── ADMIN ── */
@@ -374,7 +392,7 @@ footer{background:var(--black);color:var(--white);padding:3rem 2rem 2rem}
 .login-sub{font-size:12px;color:var(--gray);font-family:var(--mf)}
 .login-err{background:var(--red-light);border:1px solid #FECACA;color:#991B1B;border-radius:var(--r);padding:.6rem .9rem;font-size:13px;display:none;margin-bottom:.75rem}
 .login-err.show{display:block}
-.login-input{width:100%;padding:.65rem .9rem;border:1.5px solid var(--border);border-radius:var(--r);font-size:14px;outline:none;transition:border .15s;margin-bottom:.75rem;font-family:var(--ff)}
+.login-input{width:100%;padding:.65rem .9rem;border:1.5px solid var(--border);border-radius:var(--r);font-size:14px;outline:none;transition:border .15s;margin-bottom:.75rem;font-family:var(--ff);background:var(--white);color:var(--black)}
 .login-input:focus{border-color:var(--blue)}
 .login-label{font-size:12px;font-weight:600;color:var(--gray);display:block;margin-bottom:.3rem}
 .login-btn{width:100%;background:var(--blue);color:var(--white);border:none;padding:.75rem;border-radius:var(--r);font-size:15px;font-weight:700;transition:all .15s;font-family:var(--ff)}
@@ -420,7 +438,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}
 th{background:var(--lgray);padding:.65rem 1rem;text-align:left;font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.05em;font-family:var(--mf);white-space:nowrap;border-bottom:1px solid var(--border)}
 td{padding:.7rem 1rem;border-bottom:1px solid var(--border);vertical-align:middle}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:rgba(37,99,235,.02)}
+tr:hover td{background:rgba(201,168,76,.04)}
 .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:5px;font-size:11px;font-weight:600;font-family:var(--mf);white-space:nowrap}
 .badge-pending{background:var(--amber-light);color:var(--amber-dark)}
 .badge-confirmed{background:var(--blue-light);color:var(--blue-dark)}
@@ -433,11 +451,11 @@ tr:hover td{background:rgba(37,99,235,.02)}
 .btn-bg{background:var(--green);color:var(--white)}.btn-bg:hover{background:#16a34a}
 .btn-ba{background:var(--amber);color:var(--white)}.btn-ba:hover{background:var(--amber-dark)}
 .btn-br{background:var(--red-light);color:#991B1B;border:1px solid #FECACA}.btn-br:hover{background:#FECACA}
-.btn-bo{background:var(--white);color:var(--gray);border:1px solid var(--border)}.btn-bo:hover{border-color:var(--blue);color:var(--blue)}
+.btn-bo{background:var(--white);color:var(--gray);border:1px solid var(--border)}.btn-bo:hover{border-color:var(--gold);color:var(--gold)}
 .btn-sm{padding:.3rem .7rem;font-size:11.5px}
 .btn-xs{padding:.2rem .55rem;font-size:11px}
 .btn-ic{padding:.35rem .45rem;background:var(--lgray);border:none;border-radius:6px;color:var(--gray);font-size:14px;cursor:pointer}
-.btn-ic:hover{background:var(--border);color:var(--black)}
+.btn-ic:hover{background:var(--border-dark);color:var(--black)}
 .adm-form-input{width:100%;padding:.6rem .85rem;border:1.5px solid var(--border);border-radius:var(--r);font-size:13.5px;color:var(--black);outline:none;transition:border .15s;background:var(--white);font-family:var(--ff)}
 .adm-form-input:focus{border-color:var(--blue)}
 .adm-form-label{font-size:12px;font-weight:600;color:var(--gray);display:block;margin-bottom:.35rem}
@@ -561,8 +579,17 @@ tr:hover td{background:rgba(37,99,235,.02)}
 <div id="shop-app">
 <nav id="shop-nav">
   <div class="nav-logo">
-    <div class="nav-logo-icon">🛍️</div>
-    <div class="nav-logo-text">tai<span>khoan</span>.store</div>
+    <div class="nav-logo-icon" style="background:transparent;padding:0;width:32px;height:32px">
+      <svg width="32" height="32" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="36,4 62,16 68,42 56,66 16,66 4,42 10,16 36,4" fill="none" stroke="url(#ng1)" stroke-width="1.4"/>
+        <rect x="22" y="22" width="28" height="28" rx="2" fill="none" stroke="url(#ng1)" stroke-width=".8" transform="rotate(45 36 36)"/>
+        <path d="M25 23 H36 C43.732 23 50 28.82 50 36 C50 43.18 43.732 49 36 49 H25 Z" fill="none" stroke="url(#ng1)" stroke-width="1.8" stroke-linejoin="round"/>
+        <line x1="30" y1="28" x2="30" y2="44" stroke="#C9A84C" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="54" cy="18" r="3.5" fill="#E8C97A"/>
+        <defs><linearGradient id="ng1" x1="4" y1="4" x2="68" y2="68" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#C9A84C"/><stop offset="50%" stop-color="#E8C97A"/><stop offset="100%" stop-color="#C9A84C"/></linearGradient></defs>
+      </svg>
+    </div>
+    <div class="nav-logo-text" style="font-family:'Playfair Display',serif;font-weight:700;letter-spacing:.02em;color:var(--cream)">ducianallin<span style="color:var(--gold2);font-style:italic">.one</span></div>
   </div>
   <ul class="nav-links">
     <li><a href="#products">Sản phẩm</a></li>
@@ -641,8 +668,8 @@ tr:hover td{background:rgba(37,99,235,.02)}
       </div>
     </div>
     <div class="filter-row" id="filter-tabs">
-      <button class="ftab active" data-cat="all-products" onclick="filterCat(this)">✦ Tất cả</button>
-      <button class="ftab" data-cat="all" onclick="filterCat(this)">🔥 Hot</button>
+      <button class="ftab" data-cat="all-products" onclick="filterCat(this)">✦ Tất cả</button>
+      <button class="ftab active" data-cat="all" onclick="filterCat(this)">🔥 Hot</button>
       <button class="ftab" data-cat="streaming" onclick="filterCat(this)">📺 Streaming</button>
       <button class="ftab" data-cat="ai" onclick="filterCat(this)">🤖 AI Tools</button>
       <button class="ftab" data-cat="design" onclick="filterCat(this)">💼 Design & Tools</button>
@@ -660,9 +687,9 @@ tr:hover td{background:rgba(37,99,235,.02)}
     <div class="section-eyebrow"><span class="ey-amber">📋 Quy trình</span></div>
     <h2>Chỉ 3 bước đơn giản</h2>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem">
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--rc);padding:1.5rem;box-shadow:var(--shadow);border-top:3px solid var(--blue)"><div style="font-size:2.5rem;font-weight:800;color:var(--blue-mid);font-family:var(--mf);line-height:1;margin-bottom:.8rem">01</div><div style="font-size:15px;font-weight:700;color:var(--black);margin-bottom:.4rem">Chọn sản phẩm & đặt hàng</div><div style="font-size:13px;color:var(--gray);line-height:1.7">Chọn dịch vụ và gói phù hợp. Điền tên, email và số Zalo. Không cần tạo tài khoản.</div></div>
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--rc);padding:1.5rem;box-shadow:var(--shadow);border-top:3px solid var(--amber)"><div style="font-size:2.5rem;font-weight:800;color:var(--amber-light);font-family:var(--mf);line-height:1;margin-bottom:.8rem;-webkit-text-stroke:1px var(--amber)">02</div><div style="font-size:15px;font-weight:700;color:var(--black);margin-bottom:.4rem">Chuyển khoản thanh toán</div><div style="font-size:13px;color:var(--gray);line-height:1.7">Quét QR ngân hàng hoặc MoMo. Ghi đúng nội dung mã đơn để xác nhận nhanh.</div></div>
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--rc);padding:1.5rem;box-shadow:var(--shadow);border-top:3px solid var(--green)"><div style="font-size:2.5rem;font-weight:800;color:#BBF7D0;font-family:var(--mf);line-height:1;margin-bottom:.8rem;-webkit-text-stroke:1px var(--green)">03</div><div style="font-size:15px;font-weight:700;color:var(--black);margin-bottom:.4rem">Nhận tài khoản qua Zalo</div><div style="font-size:13px;color:var(--gray);line-height:1.7">Trong 5-15 phút, shop gửi thông tin tài khoản qua Zalo và Email. Dùng ngay!</div></div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--rc);padding:1.5rem;box-shadow:var(--shadow);border-top:3px solid var(--gold)"><div style="font-size:2.5rem;font-weight:800;color:var(--blue-mid);font-family:var(--mf);line-height:1;margin-bottom:.8rem">01</div><div style="font-size:15px;font-weight:700;color:var(--cream);margin-bottom:.4rem">Chọn sản phẩm & đặt hàng</div><div style="font-size:13px;color:var(--gray);line-height:1.7">Chọn dịch vụ và gói phù hợp. Điền tên, email và số Zalo. Không cần tạo tài khoản.</div></div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--rc);padding:1.5rem;box-shadow:var(--shadow);border-top:3px solid var(--gold)"><div style="font-size:2.5rem;font-weight:800;color:var(--amber-light);font-family:var(--mf);line-height:1;margin-bottom:.8rem;-webkit-text-stroke:1px var(--amber)">02</div><div style="font-size:15px;font-weight:700;color:var(--cream);margin-bottom:.4rem">Chuyển khoản thanh toán</div><div style="font-size:13px;color:var(--gray);line-height:1.7">Quét QR ngân hàng hoặc MoMo. Ghi đúng nội dung mã đơn để xác nhận nhanh.</div></div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--rc);padding:1.5rem;box-shadow:var(--shadow);border-top:3px solid var(--green)"><div style="font-size:2.5rem;font-weight:800;color:#BBF7D0;font-family:var(--mf);line-height:1;margin-bottom:.8rem;-webkit-text-stroke:1px var(--green)">03</div><div style="font-size:15px;font-weight:700;color:var(--cream);margin-bottom:.4rem">Nhận tài khoản qua Zalo</div><div style="font-size:13px;color:var(--gray);line-height:1.7">Trong 5-15 phút, shop gửi thông tin tài khoản qua Zalo và Email. Dùng ngay!</div></div>
     </div>
   </div>
 </section>
@@ -697,9 +724,9 @@ tr:hover td{background:rgba(37,99,235,.02)}
     <div class="section-eyebrow"><span class="ey-blue">⭐ Đánh giá</span></div>
     <h2>Khách hàng nói gì?</h2>
     <div class="rev-grid">
-      <div class="rev-card"><div style="font-size:2rem;color:var(--blue-mid);margin-bottom:.5rem">"</div><div style="font-size:13.5px;color:var(--gray);line-height:1.7;margin-bottom:1rem;font-style:italic">Shop gửi tài khoản Netflix qua Zalo siêu nhanh, chưa đến 10 phút. Dùng mấy tháng chưa bao giờ bị lỗi. Giá rẻ hơn nhiều!</div><div style="display:flex;align-items:center;gap:.75rem;border-top:1px solid var(--border);padding-top:.85rem"><div style="width:36px;height:36px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--white)">NT</div><div><div style="font-size:13px;font-weight:700;color:var(--black)">Nguyễn Thành</div><div style="font-size:11px;color:var(--amber)">★★★★★</div><div style="font-size:11px;color:var(--blue);font-family:var(--mf)">Netflix Premium</div></div></div></div>
-      <div class="rev-card"><div style="font-size:2rem;color:var(--blue-mid);margin-bottom:.5rem">"</div><div style="font-size:13.5px;color:var(--gray);line-height:1.7;margin-bottom:1rem;font-style:italic">Claude Pro Standard usage 1.25x mà hàng sạch không tut. Dùng được mấy tháng, gia hạn hoài luôn. Rất hài lòng!</div><div style="display:flex;align-items:center;gap:.75rem;border-top:1px solid var(--border);padding-top:.85rem"><div style="width:36px;height:36px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--white)">LH</div><div><div style="font-size:13px;font-weight:700;color:var(--black)">Linh Hoàng</div><div style="font-size:11px;color:var(--amber)">★★★★★</div><div style="font-size:11px;color:var(--blue);font-family:var(--mf)">Claude Pro Standard</div></div></div></div>
-      <div class="rev-card"><div style="font-size:2rem;color:var(--blue-mid);margin-bottom:.5rem">"</div><div style="font-size:13.5px;color:var(--gray);line-height:1.7;margin-bottom:1rem;font-style:italic">Adobe Full Apps 4 tháng chỉ 100k, quá rẻ! Tool tự fix lỗi tiện lắm. Làm freelance design tiết kiệm cả triệu/tháng.</div><div style="display:flex;align-items:center;gap:.75rem;border-top:1px solid var(--border);padding-top:.85rem"><div style="width:36px;height:36px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--white)">MA</div><div><div style="font-size:13px;font-weight:700;color:var(--black)">Minh Anh</div><div style="font-size:11px;color:var(--amber)">★★★★★</div><div style="font-size:11px;color:var(--blue);font-family:var(--mf)">Adobe Full Apps</div></div></div></div>
+      <div class="rev-card"><div style="font-size:2rem;color:var(--blue-mid);margin-bottom:.5rem">"</div><div style="font-size:13.5px;color:var(--gray);line-height:1.7;margin-bottom:1rem;font-style:italic">Shop gửi tài khoản Netflix qua Zalo siêu nhanh, chưa đến 10 phút. Dùng mấy tháng chưa bao giờ bị lỗi. Giá rẻ hơn nhiều!</div><div style="display:flex;align-items:center;gap:.75rem;border-top:1px solid var(--border);padding-top:.85rem"><div style="width:36px;height:36px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--white)">NT</div><div><div style="font-size:13px;font-weight:700;color:var(--cream)">Nguyễn Thành</div><div style="font-size:11px;color:var(--amber)">★★★★★</div><div style="font-size:11px;color:var(--blue);font-family:var(--mf)">Netflix Premium</div></div></div></div>
+      <div class="rev-card"><div style="font-size:2rem;color:var(--blue-mid);margin-bottom:.5rem">"</div><div style="font-size:13.5px;color:var(--gray);line-height:1.7;margin-bottom:1rem;font-style:italic">Claude Pro Standard usage 1.25x mà hàng sạch không tut. Dùng được mấy tháng, gia hạn hoài luôn. Rất hài lòng!</div><div style="display:flex;align-items:center;gap:.75rem;border-top:1px solid var(--border);padding-top:.85rem"><div style="width:36px;height:36px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--white)">LH</div><div><div style="font-size:13px;font-weight:700;color:var(--cream)">Linh Hoàng</div><div style="font-size:11px;color:var(--amber)">★★★★★</div><div style="font-size:11px;color:var(--blue);font-family:var(--mf)">Claude Pro Standard</div></div></div></div>
+      <div class="rev-card"><div style="font-size:2rem;color:var(--blue-mid);margin-bottom:.5rem">"</div><div style="font-size:13.5px;color:var(--gray);line-height:1.7;margin-bottom:1rem;font-style:italic">Adobe Full Apps 4 tháng chỉ 100k, quá rẻ! Tool tự fix lỗi tiện lắm. Làm freelance design tiết kiệm cả triệu/tháng.</div><div style="display:flex;align-items:center;gap:.75rem;border-top:1px solid var(--border);padding-top:.85rem"><div style="width:36px;height:36px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--white)">MA</div><div><div style="font-size:13px;font-weight:700;color:var(--cream)">Minh Anh</div><div style="font-size:11px;color:var(--amber)">★★★★★</div><div style="font-size:11px;color:var(--blue);font-family:var(--mf)">Adobe Full Apps</div></div></div></div>
     </div>
   </div>
 </section>
@@ -730,7 +757,7 @@ tr:hover td{background:rgba(37,99,235,.02)}
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <div><div class="footer-logo">tai<span>khoan</span>.store</div><div class="footer-tagline">Marketplace cung cấp tài khoản premium giá tối ưu. Hàng chính chủ · Bảo hành fulltime · Giao qua Zalo nhanh chóng.</div></div>
+      <div><div class="footer-logo" style="font-family:'Playfair Display',serif;font-weight:700;letter-spacing:.02em;color:var(--cream)">ducianallin<span style="color:var(--gold2);font-style:italic">.one</span></div><div class="footer-tagline">Solo Creative Agency · Marketplace cung cấp tài khoản premium giá tối ưu. Hàng chính chủ · Bảo hành fulltime · Giao qua Zalo nhanh chóng.</div></div>
       <div><div class="footer-col-title">Danh mục</div><div class="footer-links-list"><a href="#products">📺 Streaming</a><a href="#products">🤖 AI Tools</a><a href="#products">💼 Design & Tools</a><a href="#products">🛡️ VPN</a><a href="#products">📸 Ứng dụng ảnh</a></div></div>
       <div><div class="footer-col-title">Liên hệ</div><div class="footer-contact-item">💬 Zalo: 0899525666</div><div class="footer-contact-item">📧 kidfourteen@gmail.com</div><div class="footer-contact-item">📍 Đà Nẵng, Việt Nam</div><div style="margin-top:.8rem"><a href="https://zalo.me/0899525666" target="_blank" class="btn-primary" style="font-size:12.5px;padding:.45rem 1rem;display:inline-flex">💬 Nhắn Zalo ngay</a></div></div>
     </div>
@@ -1002,7 +1029,7 @@ document.getElementById('no-exchange-list').innerHTML = NO_EXCHANGE_IDS.map(id =
 document.querySelector('.footer-bottom').addEventListener('dblclick', openAdminEntry);
 
 // ════════ SHOP PRODUCTS ════════
-let shopCat = 'all-products', shopSort = 'default';
+let shopCat = 'all', shopSort = 'default';
 
 function getShopProducts() {
   const saved = ls.get(PRODS_KEY, null);
