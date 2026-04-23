@@ -1693,7 +1693,6 @@ function editProd(id) {
   document.getElementById('p-note').value=p.note||'';
   document.getElementById('p-desc').value=p.desc||'';
   document.getElementById('p-cat').value=p.category||'streaming';
-  document.getElementById('p-tag').value=p.tag||'';
   document.getElementById('p-active').value=p.active===false?'false':'true';
   document.getElementById('p-variants').value=(p.variants||[]).map(v=>v.name+' | '+v.price).join('\n');
   const iconUrl = p.iconUrl||'';
