@@ -1,7 +1,7 @@
 {
   "_meta": {
     "version": 1,
-    "updated": "2026-04-26T07:23:04.705Z"
+    "updated": "2026-04-26T07:27:18.188Z"
   },
   "products": [
     {
@@ -96,7 +96,10 @@
       "name": "YouTube Premium 6 tháng",
       "iconKey": "youtube",
       "category": "streaming",
-      "tags": [],
+      "tags": [
+        "best",
+        "hot"
+      ],
       "note": "Chính chủ Add Fam iOS",
       "variants": [
         {
@@ -104,14 +107,20 @@
           "price": 275000
         }
       ],
-      "desc": "Chính chủ · Add Fam iOS ổn định"
+      "desc": "Chính chủ · Add Fam iOS ổn định",
+      "tag": "best",
+      "active": true,
+      "iconUrl": ""
     },
     {
       "id": "youtube-1-nam",
       "name": "YouTube Premium 1 năm",
       "iconKey": "youtube",
       "category": "streaming",
-      "tags": [],
+      "tags": [
+        "best",
+        "hot"
+      ],
       "note": "Chính chủ Add Fam iOS",
       "variants": [
         {
@@ -119,7 +128,10 @@
           "price": 495000
         }
       ],
-      "desc": "Chính chủ · Add Fam iOS ổn định"
+      "desc": "Chính chủ · Add Fam iOS ổn định",
+      "tag": "best",
+      "active": true,
+      "iconUrl": ""
     },
     {
       "id": "galaxy",
@@ -141,7 +153,10 @@
       "name": "FPT VVIP 1 Tivi / năm",
       "iconKey": "fpt",
       "category": "streaming",
-      "tags": [],
+      "tags": [
+        "best",
+        "hot"
+      ],
       "note": "NHA + WC + VLeague",
       "variants": [
         {
@@ -149,7 +164,10 @@
           "price": 330000
         }
       ],
-      "desc": "Cấp sẵn · Ngoại Hạng Anh · World Cup · VLeague"
+      "desc": "Cấp sẵn · Ngoại Hạng Anh · World Cup · VLeague",
+      "tag": "best",
+      "active": true,
+      "iconUrl": ""
     },
     {
       "id": "fpt-2-tivi-nam",
