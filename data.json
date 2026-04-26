@@ -1,7 +1,7 @@
 {
   "_meta": {
     "version": 1,
-    "updated": "2026-04-26T07:27:18.188Z"
+    "updated": "2026-04-26T07:42:07.896Z"
   },
   "products": [
     {
@@ -263,7 +263,10 @@
       "name": "GPT Pro 5x Pro / tháng",
       "iconKey": "gpt",
       "category": "ai",
-      "tags": [],
+      "tags": [
+        "best",
+        "hot"
+      ],
       "note": "Chính chủ cao cấp",
       "variants": [
         {
@@ -271,7 +274,10 @@
           "price": 715000
         }
       ],
-      "desc": "Chính chủ · Hiệu năng cao nhất"
+      "desc": "Chính chủ · Hiệu năng cao nhất",
+      "tag": "best",
+      "active": true,
+      "iconUrl": ""
     },
     {
       "id": "gpt-pro-20x-pro-thang",
