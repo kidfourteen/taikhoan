@@ -765,14 +765,71 @@ tr:hover td{background:rgba(201,168,76,.04)}
   .page-tabs::-webkit-scrollbar{display:none}
   .page-tab{flex-shrink:0;white-space:nowrap;font-size:12px;padding:.35rem .75rem}
 
-  /* ── Drawer mobile ── */
-  .drawer{border-radius:14px;max-height:92vh;max-width:100%}
-  .var-grid{grid-template-columns:repeat(2,1fr)}
-  .drawer-header{border-radius:14px 14px 0 0;padding:1rem 1.1rem}
-  .drawer-title{font-size:15px}
-  .drawer-body{padding:1rem 1.1rem}
-  .drawer-footer{padding:.8rem 1.1rem}
-  .overlay{padding:.75rem}
+  /* ── Drawer mobile: bottom sheet style (trượt từ dưới lên) ── */
+  .overlay {
+    align-items: flex-end !important;  /* Drawer dán đáy thay vì center */
+    padding: 0 !important;
+  }
+  .drawer {
+    border-radius: 18px 18px 0 0 !important;
+    max-height: calc(100vh - 40px) !important;        /* Để 40px space ở trên */
+    max-height: calc(100dvh - 40px) !important;       /* Dynamic viewport — tránh issue address bar Chrome */
+    height: auto;
+    max-width: 100% !important;
+    width: 100% !important;
+    transform: translateY(100%) !important;            /* Bắt đầu ngoài màn hình dưới */
+    transition: transform .35s cubic-bezier(.32,.72,0,1) !important;
+    display: flex;
+    flex-direction: column;
+    overscroll-behavior: contain;                      /* Chặn scroll của body khi đang ở trong drawer */
+  }
+  .overlay.open .drawer {
+    transform: translateY(0) !important;
+  }
+  /* Indicator vạch nhỏ ở đầu drawer (UX bottom sheet quen thuộc) */
+  .drawer-header::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 4px;
+    background: rgba(0,0,0,.18);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  .drawer-header {
+    padding-top: 1.4rem !important;  /* Chừa chỗ cho indicator */
+  }
+  .drawer-header {
+    border-radius: 0 !important;
+    padding: .9rem 1.1rem !important;
+    flex-shrink: 0;                                    /* Không bị nén khi scroll */
+  }
+  .drawer-title {font-size: 15px}
+  .drawer-body {
+    padding: 1rem 1.1rem !important;
+    flex: 1;
+    overflow-y: auto;                                  /* Body scroll được */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  .drawer-footer {
+    padding: .8rem 1.1rem calc(.8rem + env(safe-area-inset-bottom)) !important;
+    flex-shrink: 0;                                    /* Footer cố định */
+    z-index: 3;
+  }
+  /* Override max-height của drawer body để không xung đột */
+  .drawer {overflow: hidden !important}                /* drawer container không scroll */
+  .var-grid {grid-template-columns: repeat(2,1fr)}
+
+  /* Sticky bottom bar PHẢI ẨN khi overlay open - không che drawer */
+  body.has-overlay .sticky-bottom,
+  body.has-overlay .chat-fab,
+  body.has-overlay .sp-toast {
+    display: none !important;
+  }
 }
 /* Extra small phones */
 @media(max-width:380px){
@@ -3513,8 +3570,13 @@ function openOrder(id) {
   renderStep(1);
   document.getElementById('overlay').classList.add('open');
   document.body.style.overflow='hidden';
+  document.body.classList.add('has-overlay');
 }
-function closeDrawer() { document.getElementById('overlay').classList.remove('open'); document.body.style.overflow=''; }
+function closeDrawer() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
+  document.body.classList.remove('has-overlay');
+}
 function handleOverlay(e) { if(e.target===document.getElementById('overlay')) closeDrawer(); }
 
 // ESC key closes purchase drawer and admin modals
