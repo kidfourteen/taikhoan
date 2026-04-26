@@ -1,7 +1,7 @@
 {
   "_meta": {
     "version": 1,
-    "updated": "2026-04-26T07:42:07.896Z"
+    "updated": "2026-04-26T07:53:04.657Z"
   },
   "products": [
     {
@@ -1016,5 +1016,21 @@
     "badDesc": "Các app sau không hỗ trợ bảo hành đổi máy:"
   },
   "reviews": [],
-  "campaigns": []
+  "campaigns": [
+    {
+      "name": "CHÀO MỪNG 30/4 - 1/5",
+      "discountPct": 99,
+      "productIds": [
+        "capcut-1-thang-team"
+      ],
+      "startDate": "2026-04-26",
+      "endDate": "2026-04-30",
+      "minQty": 1,
+      "totalLimit": 5,
+      "userLimit": 1,
+      "active": true,
+      "id": "cmp-1777189979371",
+      "createdAt": 1777189979371
+    }
+  ]
 }
