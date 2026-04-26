@@ -28,6 +28,11 @@ const SITE_CONFIG = {
   BANK_HOLDER: 'TRAN MINH DUC',
   MOMO_PHONE: '0899525666',
   MOMO_NAME: 'TRAN MINH DUC',
+  // GitHub Sync — Public info (KHÔNG phải secret), hardcode để mọi browser auto-fetch data.json
+  GH_OWNER:  'kidfourteen',
+  GH_REPO:   'taikhoan',
+  GH_BRANCH: 'main',
+  GH_PATH:   'data.json',
 };
 
 const PRODUCTS_DEFAULT = [
@@ -2248,37 +2253,27 @@ tr:hover td{background:rgba(255,79,184,.055)!important}
             </div>
             <div class="card-body">
               <p style="font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:1rem">
-                Lưu sản phẩm/ưu đãi/đánh giá/quy định lên GitHub repo. Khi commit xong, mọi máy/trình duyệt khác (kể cả khách truy cập) sẽ tự fetch dữ liệu mới nhất.<br>
-                <b>Cần:</b> Personal Access Token (PAT) từ GitHub có quyền <code style="background:var(--lgray);padding:1px 5px;border-radius:3px">Contents: Read &amp; write</code> cho repo này.
+                Sản phẩm/ưu đãi/đánh giá/quy định được lưu trên GitHub repo. Khi push, mọi máy/trình duyệt khác (kể cả khách truy cập) sẽ tự fetch dữ liệu mới nhất.
               </p>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
-                <div class="adm-form-group" style="margin:0">
-                  <label class="adm-form-label">Username GitHub *</label>
-                  <input class="adm-form-input" type="text" id="gh-owner" placeholder="ducianallin">
-                </div>
-                <div class="adm-form-group" style="margin:0">
-                  <label class="adm-form-label">Tên repo *</label>
-                  <input class="adm-form-input" type="text" id="gh-repo" placeholder="ducianallin">
-                </div>
-                <div class="adm-form-group" style="margin:0">
-                  <label class="adm-form-label">Nhánh</label>
-                  <input class="adm-form-input" type="text" id="gh-branch" placeholder="main" value="main">
-                </div>
-                <div class="adm-form-group" style="margin:0">
-                  <label class="adm-form-label">Đường dẫn file</label>
-                  <input class="adm-form-input" type="text" id="gh-path" placeholder="data.json" value="data.json">
-                </div>
-                <div class="adm-form-group" style="grid-column:1/-1;margin:0">
-                  <label class="adm-form-label">Personal Access Token *</label>
-                  <input class="adm-form-input" type="password" id="gh-token" placeholder="github_pat_xxxxx..." style="font-family:var(--mf)">
-                  <div style="font-size:11px;color:var(--gray);margin-top:.3rem;line-height:1.6">
-                    Tạo tại: <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" style="color:var(--blue)">github.com/settings/personal-access-tokens/new</a> → chọn repo này → quyền <code style="background:var(--lgray);padding:1px 5px;border-radius:3px">Contents: Read and write</code><br>
-                    🔒 Token chỉ lưu localStorage trên máy này, KHÔNG commit lên repo.
-                  </div>
+
+              <div style="background:var(--lgray);padding:.85rem 1rem;border-radius:var(--r);margin-bottom:1rem;font-size:12px;line-height:1.8;font-family:var(--mf);color:var(--gray)">
+                <div>📂 <b style="color:var(--black)">Repo:</b> <span id="gh-cfg-repo">—</span></div>
+                <div>🌿 <b style="color:var(--black)">Branch:</b> <span id="gh-cfg-branch">—</span></div>
+                <div>📄 <b style="color:var(--black)">File:</b> <span id="gh-cfg-path">—</span></div>
+                <div style="font-size:11px;margin-top:.4rem;font-family:inherit">💡 Repo & branch được hardcode trong SITE_CONFIG (đầu file index.html). Để đổi, sửa trực tiếp trong code.</div>
+              </div>
+
+              <div class="adm-form-group" style="margin-bottom:0">
+                <label class="adm-form-label">Personal Access Token (PAT) *</label>
+                <input class="adm-form-input" type="password" id="gh-token" placeholder="github_pat_xxxxx..." style="font-family:var(--mf)">
+                <div style="font-size:11px;color:var(--gray);margin-top:.3rem;line-height:1.6">
+                  Tạo tại: <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" style="color:var(--blue)">github.com/settings/personal-access-tokens/new</a> → chọn repo này → quyền <code style="background:var(--white);padding:1px 5px;border-radius:3px">Contents: Read and write</code><br>
+                  🔒 Token chỉ lưu localStorage trên máy này, KHÔNG commit lên repo. Mỗi máy admin cần nhập token 1 lần.
                 </div>
               </div>
-              <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;padding-top:.6rem;border-top:1px solid var(--border)">
-                <button class="btn btn-bp" onclick="saveGhCfg()">💾 Lưu cấu hình</button>
+
+              <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;padding-top:.85rem;margin-top:.85rem;border-top:1px solid var(--border)">
+                <button class="btn btn-bp" onclick="saveGhCfg()">💾 Lưu token</button>
                 <button class="btn btn-bo" onclick="testGhConnection()">🔌 Test kết nối</button>
                 <span id="gh-test-r" style="font-size:12px;color:var(--gray);font-family:var(--mf)"></span>
               </div>
@@ -2293,7 +2288,7 @@ tr:hover td{background:rgba(255,79,184,.055)!important}
               <div id="sync-info" style="background:var(--lgray);padding:.85rem 1rem;border-radius:var(--r);margin-bottom:1rem;font-size:13px;line-height:1.7;color:var(--gray)">
                 <div><b>📊 Trạng thái:</b> <span id="sync-stat-text">—</span></div>
                 <div><b>🕐 Lần sync gần nhất:</b> <span id="sync-stat-last">Chưa từng</span></div>
-                <div><b>📂 File:</b> <span id="sync-stat-url" style="font-family:var(--mf);font-size:11px;word-break:break-all">—</span></div>
+                <div><b>📂 URL data.json:</b> <span id="sync-stat-url" style="font-family:var(--mf);font-size:11px;word-break:break-all">—</span></div>
               </div>
 
               <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
@@ -2302,8 +2297,8 @@ tr:hover td{background:rgba(255,79,184,.055)!important}
                 <span id="sync-result" style="font-size:12px;font-family:var(--mf);font-weight:600"></span>
               </div>
               <div style="font-size:11px;color:var(--gray);margin-top:.7rem;line-height:1.6">
-                ⬆️ <b>Push</b>: Commit dữ liệu hiện tại lên GitHub. Mọi máy khác sẽ fetch được sau ~5s.<br>
-                ⬇️ <b>Pull</b>: Lấy dữ liệu mới nhất từ GitHub về máy này (ghi đè local). Dùng khi máy khác đã update trước.
+                ⬆️ <b>Push</b>: Commit dữ liệu hiện tại lên GitHub. Mọi máy/khách sẽ thấy data mới sau ~5 phút (do cache). Hard refresh (Ctrl+Shift+R) để thấy ngay.<br>
+                ⬇️ <b>Pull</b>: Lấy data mới nhất từ GitHub về máy này (ghi đè local). Dùng khi máy khác đã update trước.
               </div>
             </div>
           </div>
@@ -2526,11 +2521,24 @@ const DATA_CACHE_KEY = 'tk_data_cache';
 const DATA_CACHE_TS = 'tk_data_cache_ts';
 
 const gh = {
-  cfg: () => ls.get(GHCFG_KEY, { owner:'', repo:'', branch:'main', path:'data.json', token:'' }),
-  setCfg: v => ls.set(GHCFG_KEY, v),
-  isConfigured: () => { const c = ls.get(GHCFG_KEY, null); return !!(c && c.owner && c.repo && c.token); },
-  rawUrl: () => { const c = ls.get(GHCFG_KEY, {}); return c.owner && c.repo ? `https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch||'main'}/${c.path||'data.json'}` : null; },
-  apiUrl: () => { const c = ls.get(GHCFG_KEY, {}); return c.owner && c.repo ? `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${c.path||'data.json'}` : null; },
+  // Owner/repo/branch/path lấy từ SITE_CONFIG (hardcode, public, mọi browser đều có)
+  // Chỉ token là localStorage local cho admin
+  cfg: () => {
+    const local = ls.get(GHCFG_KEY, {});
+    return {
+      owner:  SITE_CONFIG.GH_OWNER  || local.owner  || '',
+      repo:   SITE_CONFIG.GH_REPO   || local.repo   || '',
+      branch: SITE_CONFIG.GH_BRANCH || local.branch || 'main',
+      path:   SITE_CONFIG.GH_PATH   || local.path   || 'data.json',
+      token:  local.token || ''   // Token CHỈ từ localStorage, không bao giờ hardcode
+    };
+  },
+  setToken: tok => { const cur = ls.get(GHCFG_KEY, {}); ls.set(GHCFG_KEY, {...cur, token: tok}); },
+  hasRepo: () => !!(SITE_CONFIG.GH_OWNER && SITE_CONFIG.GH_REPO),
+  hasToken: () => !!ls.get(GHCFG_KEY, {}).token,
+  isConfigured: () => gh.hasRepo() && gh.hasToken(),
+  rawUrl: () => { const c = gh.cfg(); return c.owner && c.repo ? `https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${c.path}` : null; },
+  apiUrl: () => { const c = gh.cfg(); return c.owner && c.repo ? `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${c.path}` : null; },
 
   // Fetch latest data từ raw URL (instant, không cache GitHub)
   fetch: async () => {
@@ -2547,7 +2555,7 @@ const gh = {
   getSha: async () => {
     const c = gh.cfg();
     if (!c.token) throw new Error('Chưa cấu hình token');
-    const res = await fetch(gh.apiUrl() + '?ref=' + (c.branch||'main'), {
+    const res = await fetch(gh.apiUrl() + '?ref=' + c.branch, {
       headers:{ 'Authorization':'Bearer '+c.token, 'Accept':'application/vnd.github+json' }
     });
     if (res.status === 404) return null; // file chưa tồn tại
@@ -2573,7 +2581,7 @@ const gh = {
     const body = {
       message: 'Update data.json — ' + new Date().toLocaleString('vi-VN'),
       content,
-      branch: c.branch||'main'
+      branch: c.branch
     };
     if (sha) body.sha = sha;
     const res = await fetch(gh.apiUrl(), {
@@ -2610,9 +2618,8 @@ const gh = {
 // ════════ AUTO-LOAD: fetch data.json mỗi khi mở site (cache 5 phút) ════════
 const _CACHE_TTL_MS = 5 * 60 * 1000;
 async function loadDataFromGithub(force) {
-  // Nếu chưa configure: skip, dùng default
-  const c = ls.get(GHCFG_KEY, null);
-  if (!c || !c.owner || !c.repo) return false;
+  // Nếu chưa hardcode owner/repo trong SITE_CONFIG: skip
+  if (!gh.hasRepo()) return false;
 
   const ts = ls.get(DATA_CACHE_TS, 0);
   const fresh = !force && (Date.now() - ts < _CACHE_TTL_MS);
@@ -2623,13 +2630,14 @@ async function loadDataFromGithub(force) {
 
   try {
     const res = await fetch(url + '?t=' + Date.now(), { cache:'no-store' });
-    if (!res.ok) return false;
+    if (!res.ok) { console.warn('[loadDataFromGithub] HTTP', res.status); return false; }
     const data = await res.json();
     if (data.products)  ls.set(PRODS_KEY, data.products);
     if (data.rules)     ls.set(RULES_KEY, data.rules);
     if (data.reviews)   ls.set(REVIEWS_KEY, data.reviews);
     if (data.campaigns) ls.set(CAMPAIGNS_KEY, data.campaigns);
     ls.set(DATA_CACHE_TS, Date.now());
+    console.log('[loadDataFromGithub] ✓ Loaded', data.products?.length, 'products from GitHub');
     return true;
   } catch(e) { console.warn('[loadDataFromGithub]', e); return false; }
 }
@@ -3465,10 +3473,9 @@ function admRefresh() {
 // ════════ GITHUB SYNC UI ════════
 function renderSyncPage() {
   const c = gh.cfg();
-  document.getElementById('gh-owner').value = c.owner || '';
-  document.getElementById('gh-repo').value = c.repo || '';
-  document.getElementById('gh-branch').value = c.branch || 'main';
-  document.getElementById('gh-path').value = c.path || 'data.json';
+  document.getElementById('gh-cfg-repo').textContent   = (c.owner && c.repo) ? (c.owner + '/' + c.repo) : '⚠️ Chưa hardcode trong SITE_CONFIG';
+  document.getElementById('gh-cfg-branch').textContent = c.branch;
+  document.getElementById('gh-cfg-path').textContent   = c.path;
   document.getElementById('gh-token').value = c.token || '';
   refreshSyncInfo();
 }
@@ -3477,13 +3484,17 @@ function refreshSyncInfo() {
   const dirty = gh.isDirty();
   const last = gh.lastSync();
   const url = gh.rawUrl();
-  const configured = gh.isConfigured();
+  const hasRepo = gh.hasRepo();
+  const hasToken = gh.hasToken();
 
   const badge = document.getElementById('sync-status-badge');
   if (badge) {
-    if (!configured) {
-      badge.textContent = '⚙️ Chưa cấu hình';
+    if (!hasRepo) {
+      badge.textContent = '⚙️ Chưa hardcode repo';
       badge.style.background = 'var(--lgray)'; badge.style.color = 'var(--gray)';
+    } else if (!hasToken) {
+      badge.textContent = '🔑 Cần nhập token';
+      badge.style.background = '#FEF3C7'; badge.style.color = '#92400E';
     } else if (dirty) {
       badge.textContent = '⚠️ Có thay đổi chưa sync';
       badge.style.background = '#FEF3C7'; badge.style.color = '#92400E';
@@ -3493,7 +3504,12 @@ function refreshSyncInfo() {
     }
   }
   const stat = document.getElementById('sync-stat-text');
-  if (stat) stat.textContent = !configured ? 'Chưa cấu hình' : (dirty ? '⚠️ Có thay đổi local chưa push' : '✅ Đồng bộ với GitHub');
+  if (stat) {
+    if (!hasRepo) stat.textContent = 'Chưa hardcode owner/repo';
+    else if (!hasToken) stat.textContent = '🔑 Chưa nhập token (chỉ fetch được, không push được)';
+    else if (dirty) stat.textContent = '⚠️ Có thay đổi local chưa push';
+    else stat.textContent = '✅ Đồng bộ với GitHub';
+  }
   const lastEl = document.getElementById('sync-stat-last');
   if (lastEl) lastEl.textContent = last ? new Date(last).toLocaleString('vi-VN') : 'Chưa từng';
   const urlEl = document.getElementById('sync-stat-url');
@@ -3513,21 +3529,15 @@ function updateSyncBadge() {
 }
 
 function saveGhCfg() {
-  const cfg = {
-    owner: document.getElementById('gh-owner').value.trim(),
-    repo:  document.getElementById('gh-repo').value.trim(),
-    branch:document.getElementById('gh-branch').value.trim() || 'main',
-    path:  document.getElementById('gh-path').value.trim() || 'data.json',
-    token: document.getElementById('gh-token').value.trim()
-  };
-  if (!cfg.owner || !cfg.repo || !cfg.token) {
-    showToast('Vui lòng điền đầy đủ Username, Repo và Token','error');
+  const token = document.getElementById('gh-token').value.trim();
+  if (!token) {
+    showToast('Vui lòng điền Personal Access Token','error');
     return;
   }
-  gh.setCfg(cfg);
+  gh.setToken(token);
   refreshSyncInfo();
   updateSyncBadge();
-  showToast('✅ Đã lưu cấu hình GitHub','success');
+  showToast('✅ Đã lưu token','success');
 }
 
 async function testGhConnection() {
