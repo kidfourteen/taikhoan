@@ -941,6 +941,84 @@ a,button,.prod-card,.ftab,.sort-btn{touch-action:manipulation}
   padding:4.3rem clamp(1rem,3vw,3.2rem) 4.1rem;
   background:transparent;
   overflow:visible;
+  position:relative;
+}
+/* Synthwave grid floor */
+.hero-grid-floor{
+  position:absolute;
+  bottom:-30px;
+  left:0;
+  right:0;
+  height:200px;
+  pointer-events:none;
+  perspective:400px;
+  perspective-origin:center top;
+  z-index:0;
+  overflow:hidden;
+  opacity:.55;
+}
+.hero-grid-floor::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(244,114,182,.6) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(244,114,182,.5) 1px,transparent 1px);
+  background-size:42px 42px;
+  transform:rotateX(60deg) translateY(-20px);
+  transform-origin:center bottom;
+  animation:gridScroll 8s linear infinite;
+  filter:drop-shadow(0 0 4px rgba(244,114,182,.4));
+}
+.hero-grid-floor::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:80px;
+  background:linear-gradient(180deg,transparent,rgba(15,8,32,.95));
+  z-index:1;
+}
+@keyframes gridScroll{
+  0%{background-position:0 0,0 0}
+  100%{background-position:0 42px,0 0}
+}
+/* Synthwave neon sun behind */
+.hero-sun{
+  position:absolute;
+  bottom:-50px;
+  left:50%;
+  transform:translateX(-50%);
+  width:380px;
+  height:380px;
+  border-radius:50%;
+  background:linear-gradient(180deg,#FB7185 0%,#F472B6 35%,#A855F7 70%,transparent 100%);
+  filter:blur(1px);
+  pointer-events:none;
+  z-index:0;
+  opacity:.55;
+  animation:sunPulse 4s ease-in-out infinite;
+}
+.hero-sun::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:repeating-linear-gradient(0deg,transparent 0,transparent 24px,rgba(15,8,32,.85) 24px,rgba(15,8,32,.85) 28px);
+}
+.hero-sun::after{
+  content:'';
+  position:absolute;
+  inset:-30px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(244,114,182,.4),transparent 70%);
+  z-index:-1;
+  filter:blur(20px);
+}
+@keyframes sunPulse{
+  0%,100%{filter:blur(1px) brightness(1)}
+  50%{filter:blur(2px) brightness(1.15)}
 }
 .hero::before{
   top:8%;
@@ -964,6 +1042,47 @@ a,button,.prod-card,.ftab,.sort-btn{touch-action:manipulation}
   height:500px;
   background:radial-gradient(circle,rgba(82,25,255,.34),transparent 66%);
 }
+@media(prefers-reduced-motion:reduce){
+  .hero-grid-floor::before,.hero-sun{animation:none}
+}
+@media(max-width:768px){
+  .hero-grid-floor{height:120px;opacity:.35}
+  .hero-sun{width:240px;height:240px;bottom:-100px}
+}
+
+/* Floating sparkles */
+.hero-sparkles{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  overflow:hidden;
+}
+.hero-sparkles span{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:#fff;
+  border-radius:50%;
+  box-shadow:0 0 8px #fff,0 0 16px rgba(244,114,182,.6);
+  opacity:0;
+  animation:sparkleFloat 6s ease-in-out infinite;
+}
+.hero-sparkles span:nth-child(1){top:18%;left:8%;animation-delay:0s}
+.hero-sparkles span:nth-child(2){top:32%;left:42%;animation-delay:.8s;background:#FBCFE8;box-shadow:0 0 8px #FBCFE8,0 0 16px rgba(244,114,182,.7)}
+.hero-sparkles span:nth-child(3){top:58%;left:14%;animation-delay:1.6s;background:#A5F3FC;box-shadow:0 0 8px #A5F3FC,0 0 16px rgba(34,211,238,.6)}
+.hero-sparkles span:nth-child(4){top:24%;left:78%;animation-delay:2.4s}
+.hero-sparkles span:nth-child(5){top:68%;left:88%;animation-delay:3.2s;background:#DDD6FE;box-shadow:0 0 8px #DDD6FE,0 0 16px rgba(168,85,247,.6)}
+.hero-sparkles span:nth-child(6){top:8%;left:62%;animation-delay:4s}
+.hero-sparkles span:nth-child(7){top:78%;left:38%;animation-delay:4.8s;background:#FBCFE8}
+.hero-sparkles span:nth-child(8){top:46%;left:6%;animation-delay:5.6s}
+@keyframes sparkleFloat{
+  0%,100%{opacity:0;transform:translateY(0) scale(.5)}
+  20%{opacity:1;transform:translateY(-10px) scale(1)}
+  50%{opacity:.7;transform:translateY(-30px) scale(.8)}
+  80%{opacity:.4;transform:translateY(-50px) scale(.6)}
+}
+@media(prefers-reduced-motion:reduce){.hero-sparkles span{animation:none;opacity:.3}}
 .hero-inner{
   max-width:var(--page-max);
   grid-template-columns:minmax(0,1fr) 500px;
@@ -1002,7 +1121,7 @@ h1 .hl-blue,h1 .hl-amber,h2 .hl-blue,.metric-num .blue,.metric-num .amber,.proof
   line-height:1.8;
 }
 
-/* Floating hero service cards */
+/* Floating hero service cards - SYNTHWAVE */
 .hero-card{
   min-height:480px;
   background:transparent;
@@ -1023,42 +1142,124 @@ h1 .hl-blue,h1 .hl-amber,h2 .hl-blue,.metric-num .blue,.metric-num .amber,.proof
   flex-direction:column;
   align-items:flex-start;
   justify-content:space-between;
-  background:linear-gradient(155deg,rgba(31,35,82,.92),rgba(10,13,35,.88));
-  border:1px solid rgba(255,255,255,.12);
+  background:
+    linear-gradient(155deg,rgba(30,11,58,.92),rgba(15,8,32,.96));
+  border:1px solid transparent;
   border-radius:24px;
-  box-shadow:0 24px 70px rgba(0,0,0,.40),inset 0 1px 0 rgba(255,255,255,.12);
-  backdrop-filter:blur(18px) saturate(145%);
+  box-shadow:
+    0 0 28px rgba(244,114,182,.28),
+    0 0 56px rgba(168,85,247,.16),
+    0 24px 70px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter:blur(20px) saturate(160%);
   transform:rotate(-4deg);
-  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
-  animation:subtleFloat 6s ease-in-out infinite;
+  transition:transform .35s cubic-bezier(.2,.8,.3,1.2),box-shadow .35s ease;
+  animation:synthFloat 7s ease-in-out infinite;
+  overflow:hidden;
+  isolation:isolate;
 }
-.hcard-row::after{
+/* Animated gradient border */
+.hcard-row::before{
   content:'';
   position:absolute;
   inset:-1px;
   border-radius:24px;
-  padding:1px;
-  background:linear-gradient(135deg,rgba(255,79,184,.66),rgba(0,207,255,.36),rgba(125,76,255,.58));
+  padding:1.5px;
+  background:linear-gradient(135deg,#F472B6 0%,#A855F7 30%,#22D3EE 60%,#F472B6 100%);
+  background-size:300% 300%;
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
   -webkit-mask-composite:xor;
   mask-composite:exclude;
   pointer-events:none;
+  animation:synthBorderShine 5s linear infinite;
+  z-index:1;
 }
+/* Inner glow + scanline overlay */
+.hcard-row::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:24px;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(244,114,182,.32),transparent 45%),
+    radial-gradient(circle at 100% 100%,rgba(34,211,238,.20),transparent 45%),
+    repeating-linear-gradient(0deg,transparent 0,transparent 2px,rgba(255,255,255,.012) 2px,rgba(255,255,255,.012) 3px);
+  z-index:0;
+  opacity:.95;
+}
+.hcard-row > *{position:relative;z-index:2}
 .hcard-row:hover{
-  transform:rotate(0deg) translateY(-10px);
-  border-color:rgba(255,79,184,.45);
-  box-shadow:0 28px 80px rgba(255,79,184,.22),0 22px 70px rgba(0,0,0,.44);
+  transform:rotate(0deg) translateY(-12px) scale(1.04);
+  box-shadow:
+    0 0 40px rgba(244,114,182,.6),
+    0 0 80px rgba(168,85,247,.32),
+    0 32px 90px rgba(0,0,0,.6),
+    inset 0 1px 0 rgba(255,255,255,.18);
 }
 .hcard-row:nth-child(1){top:2px;left:48px}
-.hcard-row:nth-child(2){top:26px;right:10px;transform:rotate(2deg);animation-delay:.35s}
-.hcard-row:nth-child(3){top:160px;left:0;transform:rotate(5deg);animation-delay:.7s}
-.hcard-row:nth-child(4){top:178px;right:58px;transform:rotate(3deg);animation-delay:1.05s}
-.hcard-row:nth-child(5){top:322px;left:22px;transform:rotate(4deg);animation-delay:1.4s}
-.hcard-row:nth-child(6){top:330px;right:12px;transform:rotate(4deg);animation-delay:1.75s}
+.hcard-row:nth-child(2){top:26px;right:10px;transform:rotate(2deg);animation-delay:.5s}
+.hcard-row:nth-child(3){top:160px;left:0;transform:rotate(5deg);animation-delay:1s}
+.hcard-row:nth-child(4){top:178px;right:58px;transform:rotate(3deg);animation-delay:1.5s}
+.hcard-row:nth-child(5){top:322px;left:22px;transform:rotate(4deg);animation-delay:2s}
+.hcard-row:nth-child(6){top:330px;right:12px;transform:rotate(4deg);animation-delay:2.5s}
 .hrow-left{width:100%;gap:.8rem}
-.hrow-icon{width:46px;height:46px;flex:0 0 46px}
-.hrow-name{font-size:1.04rem;font-weight:800;color:#fff!important}
-.hrow-price{color:#fff!important;font-size:12px;background:rgba(255,255,255,.08);padding:4px 8px;border-radius:999px}
+.hrow-icon{
+  width:46px;
+  height:46px;
+  flex:0 0 46px;
+  border-radius:12px;
+  position:relative;
+  overflow:hidden;
+}
+.hrow-icon::after{
+  content:'';
+  position:absolute;
+  inset:-1px;
+  border-radius:13px;
+  background:linear-gradient(135deg,rgba(244,114,182,.5),rgba(34,211,238,.3));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  padding:1px;
+  pointer-events:none;
+}
+.hrow-name{
+  font-size:1.04rem;
+  font-weight:800;
+  background:linear-gradient(90deg,#fff 0%,#FBCFE8 50%,#fff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 8px rgba(244,114,182,.4));
+}
+.hrow-note{
+  font-size:10px;
+  color:#cbd5e1!important;
+  opacity:.85;
+}
+.hrow-price{
+  color:#fff!important;
+  font-size:12px;
+  font-weight:700;
+  background:linear-gradient(90deg,rgba(244,114,182,.18),rgba(168,85,247,.18));
+  border:1px solid rgba(244,114,182,.4);
+  padding:4px 10px;
+  border-radius:999px;
+  box-shadow:0 0 12px rgba(244,114,182,.25),inset 0 1px 0 rgba(255,255,255,.1);
+  font-family:var(--mf);
+}
+@keyframes synthFloat{
+  0%,100%{transform:rotate(var(--rot,-4deg)) translateY(0)}
+  50%{transform:rotate(var(--rot,-4deg)) translateY(-8px)}
+}
+@keyframes synthBorderShine{
+  0%{background-position:0% 50%}
+  100%{background-position:300% 50%}
+}
+@media(prefers-reduced-motion:reduce){
+  .hcard-row,.hcard-row::before{animation:none}
+}
 
 /* Metrics */
 .metrics-bar{
@@ -1650,6 +1851,9 @@ tr:hover td{background:rgba(255,79,184,.055)!important}
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-sun"></div>
+  <div class="hero-grid-floor"></div>
+  <div class="hero-sparkles"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <div class="hero-inner">
     <div>
       <div class="hero-eyebrow"><div class="hero-dot"></div>Đang phục vụ <strong>2,800+</strong> khách hàng</div>
@@ -1839,6 +2043,7 @@ tr:hover td{background:rgba(255,79,184,.055)!important}
       <div class="sb-item" data-page="rules" onclick="admPage('rules',this)"><span class="sb-item-icon">📌</span> Quy định</div>
       <div class="sb-item" data-page="reviews" onclick="admPage('reviews',this)"><span class="sb-item-icon">⭐</span> Đánh giá</div>
       <div class="sb-sec">Hệ thống</div>
+      <div class="sb-item" data-page="sync" onclick="admPage('sync',this)"><span class="sb-item-icon">☁️</span> Sync GitHub<span class="sb-cnt" id="sb-cnt-sync" style="display:none;background:#F472B6">!</span></div>
       <div class="sb-item" data-page="settings" onclick="admPage('settings',this)"><span class="sb-item-icon">⚙️</span> Cài đặt</div>
     </nav>
     <div class="sb-footer">
@@ -2029,6 +2234,78 @@ tr:hover td{background:rgba(255,79,184,.055)!important}
               <thead><tr><th>#</th><th>Link Facebook</th><th>Cao (px)</th><th>Preview</th><th>Ngày thêm</th><th>Thao tác</th></tr></thead>
               <tbody id="revs-tbody"></tbody>
             </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYNC GITHUB -->
+      <div id="adm-sync" style="display:none">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="card" style="grid-column:1/-1">
+            <div class="card-header">
+              <div class="card-title">☁️ Đồng bộ dữ liệu qua GitHub</div>
+              <span id="sync-status-badge" style="background:var(--lgray);color:var(--gray);padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600">Chưa cấu hình</span>
+            </div>
+            <div class="card-body">
+              <p style="font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:1rem">
+                Lưu sản phẩm/ưu đãi/đánh giá/quy định lên GitHub repo. Khi commit xong, mọi máy/trình duyệt khác (kể cả khách truy cập) sẽ tự fetch dữ liệu mới nhất.<br>
+                <b>Cần:</b> Personal Access Token (PAT) từ GitHub có quyền <code style="background:var(--lgray);padding:1px 5px;border-radius:3px">Contents: Read &amp; write</code> cho repo này.
+              </p>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+                <div class="adm-form-group" style="margin:0">
+                  <label class="adm-form-label">Username GitHub *</label>
+                  <input class="adm-form-input" type="text" id="gh-owner" placeholder="ducianallin">
+                </div>
+                <div class="adm-form-group" style="margin:0">
+                  <label class="adm-form-label">Tên repo *</label>
+                  <input class="adm-form-input" type="text" id="gh-repo" placeholder="ducianallin">
+                </div>
+                <div class="adm-form-group" style="margin:0">
+                  <label class="adm-form-label">Nhánh</label>
+                  <input class="adm-form-input" type="text" id="gh-branch" placeholder="main" value="main">
+                </div>
+                <div class="adm-form-group" style="margin:0">
+                  <label class="adm-form-label">Đường dẫn file</label>
+                  <input class="adm-form-input" type="text" id="gh-path" placeholder="data.json" value="data.json">
+                </div>
+                <div class="adm-form-group" style="grid-column:1/-1;margin:0">
+                  <label class="adm-form-label">Personal Access Token *</label>
+                  <input class="adm-form-input" type="password" id="gh-token" placeholder="github_pat_xxxxx..." style="font-family:var(--mf)">
+                  <div style="font-size:11px;color:var(--gray);margin-top:.3rem;line-height:1.6">
+                    Tạo tại: <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" style="color:var(--blue)">github.com/settings/personal-access-tokens/new</a> → chọn repo này → quyền <code style="background:var(--lgray);padding:1px 5px;border-radius:3px">Contents: Read and write</code><br>
+                    🔒 Token chỉ lưu localStorage trên máy này, KHÔNG commit lên repo.
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;padding-top:.6rem;border-top:1px solid var(--border)">
+                <button class="btn btn-bp" onclick="saveGhCfg()">💾 Lưu cấu hình</button>
+                <button class="btn btn-bo" onclick="testGhConnection()">🔌 Test kết nối</button>
+                <span id="gh-test-r" style="font-size:12px;color:var(--gray);font-family:var(--mf)"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="grid-column:1/-1">
+            <div class="card-header">
+              <div class="card-title">🔄 Đồng bộ ngay</div>
+            </div>
+            <div class="card-body">
+              <div id="sync-info" style="background:var(--lgray);padding:.85rem 1rem;border-radius:var(--r);margin-bottom:1rem;font-size:13px;line-height:1.7;color:var(--gray)">
+                <div><b>📊 Trạng thái:</b> <span id="sync-stat-text">—</span></div>
+                <div><b>🕐 Lần sync gần nhất:</b> <span id="sync-stat-last">Chưa từng</span></div>
+                <div><b>📂 File:</b> <span id="sync-stat-url" style="font-family:var(--mf);font-size:11px;word-break:break-all">—</span></div>
+              </div>
+
+              <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
+                <button class="btn btn-bp" onclick="doGhPush()" style="background:linear-gradient(90deg,#F472B6,#A855F7);border:none">⬆️ Push lên GitHub</button>
+                <button class="btn btn-bo" onclick="doGhPull()">⬇️ Pull từ GitHub (ghi đè local)</button>
+                <span id="sync-result" style="font-size:12px;font-family:var(--mf);font-weight:600"></span>
+              </div>
+              <div style="font-size:11px;color:var(--gray);margin-top:.7rem;line-height:1.6">
+                ⬆️ <b>Push</b>: Commit dữ liệu hiện tại lên GitHub. Mọi máy khác sẽ fetch được sau ~5s.<br>
+                ⬇️ <b>Pull</b>: Lấy dữ liệu mới nhất từ GitHub về máy này (ghi đè local). Dùng khi máy khác đã update trước.
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2240,10 +2517,126 @@ const CAT_STYLE = { streaming:{color:'c-blue',icon:'icon-blue'}, ai:{color:'c-pu
 
 // ════════ STORAGE ════════
 const ls = { get:(k,d)=>{ try{return JSON.parse(localStorage.getItem(k))??d}catch{return d} }, set:(k,v)=>localStorage.setItem(k,JSON.stringify(v)) };
+
+// ════════ GITHUB SYNC MODULE ════════
+const GHCFG_KEY = 'tk_ghcfg';
+const SYNC_DIRTY_KEY = 'tk_sync_dirty';
+const SYNC_LAST_KEY = 'tk_sync_last';
+const DATA_CACHE_KEY = 'tk_data_cache';
+const DATA_CACHE_TS = 'tk_data_cache_ts';
+
+const gh = {
+  cfg: () => ls.get(GHCFG_KEY, { owner:'', repo:'', branch:'main', path:'data.json', token:'' }),
+  setCfg: v => ls.set(GHCFG_KEY, v),
+  isConfigured: () => { const c = ls.get(GHCFG_KEY, null); return !!(c && c.owner && c.repo && c.token); },
+  rawUrl: () => { const c = ls.get(GHCFG_KEY, {}); return c.owner && c.repo ? `https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch||'main'}/${c.path||'data.json'}` : null; },
+  apiUrl: () => { const c = ls.get(GHCFG_KEY, {}); return c.owner && c.repo ? `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${c.path||'data.json'}` : null; },
+
+  // Fetch latest data từ raw URL (instant, không cache GitHub)
+  fetch: async () => {
+    const url = gh.rawUrl();
+    if (!url) return null;
+    try {
+      const res = await fetch(url + '?t=' + Date.now(), { cache:'no-store' });
+      if (!res.ok) return null;
+      return await res.json();
+    } catch(e) { console.warn('[gh.fetch]', e); return null; }
+  },
+
+  // Get current sha (cần cho PUT)
+  getSha: async () => {
+    const c = gh.cfg();
+    if (!c.token) throw new Error('Chưa cấu hình token');
+    const res = await fetch(gh.apiUrl() + '?ref=' + (c.branch||'main'), {
+      headers:{ 'Authorization':'Bearer '+c.token, 'Accept':'application/vnd.github+json' }
+    });
+    if (res.status === 404) return null; // file chưa tồn tại
+    if (!res.ok) throw new Error('GitHub API ' + res.status);
+    return (await res.json()).sha;
+  },
+
+  // Commit data.json
+  push: async () => {
+    const c = gh.cfg();
+    if (!c.token) throw new Error('Chưa có token');
+    const data = {
+      _meta: { version: 1, updated: new Date().toISOString() },
+      products:  ls.get(PRODS_KEY, null) || PRODUCTS_DEFAULT,
+      rules:     ls.get(RULES_KEY, null) || RULES_DEFAULT,
+      reviews:   ls.get(REVIEWS_KEY, null) || REVIEWS_DEFAULT,
+      campaigns: ls.get(CAMPAIGNS_KEY, [])
+    };
+    const sha = await gh.getSha();
+    // base64 encode (handle UTF-8 đúng)
+    const json = JSON.stringify(data, null, 2);
+    const content = btoa(unescape(encodeURIComponent(json)));
+    const body = {
+      message: 'Update data.json — ' + new Date().toLocaleString('vi-VN'),
+      content,
+      branch: c.branch||'main'
+    };
+    if (sha) body.sha = sha;
+    const res = await fetch(gh.apiUrl(), {
+      method:'PUT',
+      headers:{ 'Authorization':'Bearer '+c.token, 'Accept':'application/vnd.github+json', 'Content-Type':'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(()=>({message:'Lỗi không xác định'}));
+      throw new Error(err.message || ('HTTP ' + res.status));
+    }
+    return await res.json();
+  },
+
+  // Pull from GitHub và ghi đè local
+  pull: async () => {
+    const data = await gh.fetch();
+    if (!data) throw new Error('Không fetch được data từ GitHub');
+    if (data.products)  ls.set(PRODS_KEY, data.products);
+    if (data.rules)     ls.set(RULES_KEY, data.rules);
+    if (data.reviews)   ls.set(REVIEWS_KEY, data.reviews);
+    if (data.campaigns) ls.set(CAMPAIGNS_KEY, data.campaigns);
+    ls.set(DATA_CACHE_TS, Date.now());
+    ls.set(SYNC_DIRTY_KEY, false);
+    ls.set(SYNC_LAST_KEY, data._meta?.updated || new Date().toISOString());
+    return data;
+  },
+
+  markDirty: () => ls.set(SYNC_DIRTY_KEY, true),
+  isDirty: () => ls.get(SYNC_DIRTY_KEY, false),
+  lastSync: () => ls.get(SYNC_LAST_KEY, null)
+};
+
+// ════════ AUTO-LOAD: fetch data.json mỗi khi mở site (cache 5 phút) ════════
+const _CACHE_TTL_MS = 5 * 60 * 1000;
+async function loadDataFromGithub(force) {
+  // Nếu chưa configure: skip, dùng default
+  const c = ls.get(GHCFG_KEY, null);
+  if (!c || !c.owner || !c.repo) return false;
+
+  const ts = ls.get(DATA_CACHE_TS, 0);
+  const fresh = !force && (Date.now() - ts < _CACHE_TTL_MS);
+  if (fresh) return false; // Đã fetch trong 5 phút qua, không cần lại
+
+  const url = gh.rawUrl();
+  if (!url) return false;
+
+  try {
+    const res = await fetch(url + '?t=' + Date.now(), { cache:'no-store' });
+    if (!res.ok) return false;
+    const data = await res.json();
+    if (data.products)  ls.set(PRODS_KEY, data.products);
+    if (data.rules)     ls.set(RULES_KEY, data.rules);
+    if (data.reviews)   ls.set(REVIEWS_KEY, data.reviews);
+    if (data.campaigns) ls.set(CAMPAIGNS_KEY, data.campaigns);
+    ls.set(DATA_CACHE_TS, Date.now());
+    return true;
+  } catch(e) { console.warn('[loadDataFromGithub]', e); return false; }
+}
 const getOrders = () => ls.get(ORDERS_KEY, []);
 const setOrders = v => ls.set(ORDERS_KEY, v);
 const getAdmProds = () => { const saved = ls.get(PRODS_KEY, null); return saved || PRODUCTS_DEFAULT; };
-const setAdmProds = v => ls.set(PRODS_KEY, v);
+const setAdmProds = v => { ls.set(PRODS_KEY, v); gh.markDirty(); };
 
 // ════════ RULES ════════
 const RULES_DEFAULT = {
@@ -2264,7 +2657,7 @@ const getRules = () => {
   if (!saved) return RULES_DEFAULT;
   return { ...RULES_DEFAULT, ...saved };
 };
-const setRules = v => ls.set(RULES_KEY, v);
+const setRules = v => { ls.set(RULES_KEY, v); gh.markDirty(); };
 
 // ════════ REVIEWS ════════
 const REVIEWS_DEFAULT = [];
@@ -2272,7 +2665,7 @@ const getReviews = () => {
   const saved = ls.get(REVIEWS_KEY, null);
   return saved !== null ? saved : REVIEWS_DEFAULT;
 };
-const setReviews = v => ls.set(REVIEWS_KEY, v);
+const setReviews = v => { ls.set(REVIEWS_KEY, v); gh.markDirty(); };
 
 // Build FB plugin iframe URL from a user-pasted post URL.
 // Returns null if the URL isn't a recognizable Facebook post.
@@ -2297,7 +2690,7 @@ function fbPluginSrc(postUrl, width) {
 // - minQty: 1+ means "buy N+ pieces to qualify". Default 1.
 // - active: false to pause a campaign without deleting it.
 const getCampaigns = () => ls.get(CAMPAIGNS_KEY, []);
-const setCampaigns = v => ls.set(CAMPAIGNS_KEY, v);
+const setCampaigns = v => { ls.set(CAMPAIGNS_KEY, v); gh.markDirty(); };
 
 // Parse a yyyy-mm-dd string into a timestamp at local midnight (start) or end-of-day.
 function _campDate(s, endOfDay) {
@@ -2735,7 +3128,17 @@ function filterCat(el) {
 }
 function setSort(el) { document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active')); el.classList.add('active'); shopSort=el.dataset.sort; renderProducts(); }
 
+// Initial render + async load from GitHub
 renderProducts();
+(async () => {
+  const updated = await loadDataFromGithub();
+  if (updated) {
+    renderProducts();
+    if (typeof buildHeroItems === 'function') buildHeroItems();
+    if (typeof renderShopRules === 'function') renderShopRules();
+    if (typeof renderReviews === 'function') renderReviews();
+  }
+})();
 
 // ════════ ORDER DRAWER ════════
 let currProd=null, currVar=null, orderCode='';
@@ -3038,11 +3441,11 @@ let admCurPage = 'dashboard', ordStatusFilter = 'all', editOrdId = null, editPro
 function admPage(page, el) {
   // Close mobile sidebar
   document.querySelector('.adm-sidebar')?.classList.remove('mob-open');
-  ['dashboard','orders','products','campaigns','rules','reviews','settings'].forEach(p => document.getElementById('adm-'+p).style.display = p===page?'block':'none');
+  ['dashboard','orders','products','campaigns','rules','reviews','sync','settings'].forEach(p => document.getElementById('adm-'+p).style.display = p===page?'block':'none');
   document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
   if (el) el.classList.add('active');
   admCurPage = page;
-  const titles = {dashboard:'Dashboard',orders:'Đơn hàng',products:'Sản phẩm',campaigns:'Ưu đãi',rules:'Quy định & Bảo hành',reviews:'Đánh giá',settings:'Cài đặt'};
+  const titles = {dashboard:'Dashboard',orders:'Đơn hàng',products:'Sản phẩm',campaigns:'Ưu đãi',rules:'Quy định & Bảo hành',reviews:'Đánh giá',sync:'Sync GitHub',settings:'Cài đặt'};
   document.getElementById('adm-title').textContent = titles[page]||page;
   admRefresh();
 }
@@ -3054,7 +3457,155 @@ function admRefresh() {
   if (admCurPage==='campaigns')  renderAdmCampaigns();
   if (admCurPage==='rules')      renderAdmRules();
   if (admCurPage==='reviews')    renderAdmReviews();
+  if (admCurPage==='sync')       renderSyncPage();
   if (admCurPage==='settings')   renderSettings();
+  updateSyncBadge();
+}
+
+// ════════ GITHUB SYNC UI ════════
+function renderSyncPage() {
+  const c = gh.cfg();
+  document.getElementById('gh-owner').value = c.owner || '';
+  document.getElementById('gh-repo').value = c.repo || '';
+  document.getElementById('gh-branch').value = c.branch || 'main';
+  document.getElementById('gh-path').value = c.path || 'data.json';
+  document.getElementById('gh-token').value = c.token || '';
+  refreshSyncInfo();
+}
+
+function refreshSyncInfo() {
+  const dirty = gh.isDirty();
+  const last = gh.lastSync();
+  const url = gh.rawUrl();
+  const configured = gh.isConfigured();
+
+  const badge = document.getElementById('sync-status-badge');
+  if (badge) {
+    if (!configured) {
+      badge.textContent = '⚙️ Chưa cấu hình';
+      badge.style.background = 'var(--lgray)'; badge.style.color = 'var(--gray)';
+    } else if (dirty) {
+      badge.textContent = '⚠️ Có thay đổi chưa sync';
+      badge.style.background = '#FEF3C7'; badge.style.color = '#92400E';
+    } else {
+      badge.textContent = '✅ Đã đồng bộ';
+      badge.style.background = '#D1FAE5'; badge.style.color = '#065F46';
+    }
+  }
+  const stat = document.getElementById('sync-stat-text');
+  if (stat) stat.textContent = !configured ? 'Chưa cấu hình' : (dirty ? '⚠️ Có thay đổi local chưa push' : '✅ Đồng bộ với GitHub');
+  const lastEl = document.getElementById('sync-stat-last');
+  if (lastEl) lastEl.textContent = last ? new Date(last).toLocaleString('vi-VN') : 'Chưa từng';
+  const urlEl = document.getElementById('sync-stat-url');
+  if (urlEl) urlEl.textContent = url || '—';
+}
+
+function updateSyncBadge() {
+  const b = document.getElementById('sb-cnt-sync');
+  if (!b) return;
+  if (gh.isConfigured() && gh.isDirty()) {
+    b.style.display = 'inline-flex';
+    b.textContent = '!';
+    b.style.background = '#F472B6';
+  } else {
+    b.style.display = 'none';
+  }
+}
+
+function saveGhCfg() {
+  const cfg = {
+    owner: document.getElementById('gh-owner').value.trim(),
+    repo:  document.getElementById('gh-repo').value.trim(),
+    branch:document.getElementById('gh-branch').value.trim() || 'main',
+    path:  document.getElementById('gh-path').value.trim() || 'data.json',
+    token: document.getElementById('gh-token').value.trim()
+  };
+  if (!cfg.owner || !cfg.repo || !cfg.token) {
+    showToast('Vui lòng điền đầy đủ Username, Repo và Token','error');
+    return;
+  }
+  gh.setCfg(cfg);
+  refreshSyncInfo();
+  updateSyncBadge();
+  showToast('✅ Đã lưu cấu hình GitHub','success');
+}
+
+async function testGhConnection() {
+  const r = document.getElementById('gh-test-r');
+  saveGhCfg(); // save trước khi test
+  r.textContent = '⏳ Đang kiểm tra...';
+  r.style.color = 'var(--gray)';
+  try {
+    const sha = await gh.getSha();
+    if (sha) {
+      r.textContent = '✅ OK · file đã tồn tại (sha: '+sha.substring(0,7)+')';
+      r.style.color = 'var(--green)';
+    } else {
+      r.textContent = '✅ OK · file chưa có (sẽ tạo khi push lần đầu)';
+      r.style.color = 'var(--green)';
+    }
+  } catch(e) {
+    r.textContent = '❌ ' + e.message;
+    r.style.color = 'var(--red)';
+  }
+}
+
+async function doGhPush() {
+  const btn = event.target;
+  const r = document.getElementById('sync-result');
+  if (!gh.isConfigured()) {
+    showToast('Chưa cấu hình GitHub','error');
+    return;
+  }
+  btn.disabled = true;
+  r.textContent = '⏳ Đang push...';
+  r.style.color = 'var(--gray)';
+  try {
+    const result = await gh.push();
+    ls.set(SYNC_DIRTY_KEY, false);
+    ls.set(SYNC_LAST_KEY, new Date().toISOString());
+    r.textContent = '✅ Push thành công · commit ' + (result.commit?.sha||'').substring(0,7);
+    r.style.color = 'var(--green)';
+    refreshSyncInfo();
+    updateSyncBadge();
+    showToast('✅ Đã đồng bộ lên GitHub','success');
+  } catch(e) {
+    r.textContent = '❌ ' + e.message;
+    r.style.color = 'var(--red)';
+    showToast('Push lỗi: '+e.message,'error');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function doGhPull() {
+  const btn = event.target;
+  const r = document.getElementById('sync-result');
+  if (!gh.isConfigured()) {
+    showToast('Chưa cấu hình GitHub','error');
+    return;
+  }
+  if (gh.isDirty() && !confirm('Có thay đổi local chưa push. Pull sẽ ghi đè dữ liệu local. Tiếp tục?')) return;
+  btn.disabled = true;
+  r.textContent = '⏳ Đang pull...';
+  r.style.color = 'var(--gray)';
+  try {
+    const data = await gh.pull();
+    r.textContent = '✅ Đã pull · ' + (data.products?.length||0) + ' sản phẩm';
+    r.style.color = 'var(--green)';
+    refreshSyncInfo();
+    updateSyncBadge();
+    admRefresh();
+    if (typeof renderProducts === 'function') renderProducts();
+    if (typeof buildHeroItems === 'function') buildHeroItems();
+    showToast('✅ Đã pull dữ liệu từ GitHub','success');
+  } catch(e) {
+    r.textContent = '❌ ' + e.message;
+    r.style.color = 'var(--red)';
+    showToast('Pull lỗi: '+e.message,'error');
+  } finally {
+    btn.disabled = false;
+  }
 }
 
 function admInit() {
@@ -3067,6 +3618,7 @@ function admInit() {
     cCnt.textContent = activeCamps;
     cCnt.style.background = '#15803d';
   }
+  updateSyncBadge();
   document.querySelectorAll('.modal-ov').forEach(el => el.addEventListener('click', e => { if(e.target===el) el.classList.remove('open'); }));
   // Lắng nghe đơn mới từ shop (cùng tab hoặc tab khác)
   window.addEventListener('storage', e => {
